@@ -2,8 +2,10 @@
 
 package Connection;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
 import MainPackage.ExternalPlayer;
 import MainPackage.MainApplet;
@@ -11,8 +13,7 @@ import MainPackage.MainApplet;
 public class ClientThread extends Thread {
 
 	private boolean DEBUG = true; // Debug für Umer :D
-	private static int BUFFSIZE = 128000;
-	private BufferedInputStream input;
+	private BufferedReader input;
 
 	protected int Handle(String in) {		
 		if (DEBUG)
@@ -178,24 +179,9 @@ public class ClientThread extends Thread {
 		return 0;
 	}
 
-	// bekommt nen string vom socket
-	public String RecvString(char terminal) throws IOException {
-		char c;
-		String out;
-
-		out = new String("");
-
-		while ((c = (char) input.read()) != terminal)
-			out = out + String.valueOf(c);
-		return out;
-	}
-
 	public ClientThread(Socket sock) throws IOException {
 		try {
-			// sock = new Socket(InetAddress.getByName(address), port);
-			input = new BufferedInputStream(sock.getInputStream(), BUFFSIZE);
-			// output = new BufferedOutputStream(sock.getOutputStream(),
-			// BUFFSIZE);
+			input = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -204,13 +190,15 @@ public class ClientThread extends Thread {
 
 	public void run() {
 		do {
-			String in = new String("");
+			String in = null;
 			try {
-				in = RecvString('#');
+				in = input.readLine();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Handle(in);
+			if (in != null)
+				Handle(in);
 		} while (true);
 	}
 }

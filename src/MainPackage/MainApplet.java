@@ -87,7 +87,6 @@ public class MainApplet extends JApplet {
 														// previous ; t = tick ;
 														// p = paint
 
-	// for double buffering
 	private static Dimension dim;
 
 	public void init() {

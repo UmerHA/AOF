@@ -456,6 +456,7 @@ public class Player {
 		//g.drawImage(temp, x+stepX, y+stepY, MainApplet.applet);
 		g.drawImage(temp, x, y, MainApplet.applet);
 		
+		/*
 		if (stepX != 0 || stepY != 0) {
 			System.out.println("Player.paint :: step ("+stepX+"|"+stepY+")");
 			switch (pointingDir) {
@@ -465,6 +466,7 @@ public class Player {
 				case 4 : stepY+=stepSize;break;
 			}
 		}
+		*/
 	}
 
 	public boolean addXP (String skill, int xp) {

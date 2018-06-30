@@ -170,25 +170,13 @@ public class MainApplet extends JApplet {
 	}
 
 	public void paint(Graphics g) {
-		//System.out.println("MainApplet :: repainting ...");
-		
-		/*
-		Dimension temp = getSize();
-		if ((dim.width != temp.width) || (dim.height != temp.height)) {
-			offscreen = createImage(dim.width, dim.height);
-			bufferGraphics = offscreen.getGraphics();
-			((GamePanel) panels[1]).repositionComponents();
-			dim.width = temp.width;
-			dim.height = temp.height;
-		}
-		*/
-		
 		if (bufferGraphics == null) {
 			offscreen = createImage(dim.width, dim.height);
 			bufferGraphics = offscreen.getGraphics();
 		} 
 			
 		//bufferGraphics.clearRect(0, 0, dim.width, dim.width);
+		System.out.println("Painting panel " + String.valueOf(activePanel));
 		panels[activePanel].paint(bufferGraphics);
 		
 		g.drawImage(offscreen, 0, 0, this);
@@ -312,13 +300,13 @@ public class MainApplet extends JApplet {
 		return String.valueOf((int) x);
 	}
 	public void alert(String message) {
-		JOptionPane.showMessageDialog(this, message, "OP GB",
+		JOptionPane.showMessageDialog(this, message, "AOF",
 				JOptionPane.PLAIN_MESSAGE);
 	}
 	public boolean confirm(String question) {
 		Object[] options = { "Yes", "No" };
 
-		int n = JOptionPane.showOptionDialog(this, question, "OP GB",
+		int n = JOptionPane.showOptionDialog(this, question, "AOF",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 				options, options[0]);
 
@@ -332,7 +320,7 @@ public class MainApplet extends JApplet {
 		}
 	}
 	public int yesnocancel(String question) {
-		int result = JOptionPane.showConfirmDialog(this, question, "OP GB",
+		int result = JOptionPane.showConfirmDialog(this, question, "AOF",
 				JOptionPane.YES_NO_CANCEL_OPTION);
 		return result;
 	}

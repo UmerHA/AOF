@@ -453,7 +453,8 @@ public class Player {
 			default : temp = MainApplet.applet.getImage(MainApplet.applet.getCodeBase(),tempS+"person_vorne.gif");break;	 	// default
 		}
 		
-		g.drawImage(temp, x+stepX, y+stepY, MainApplet.applet);
+		//g.drawImage(temp, x+stepX, y+stepY, MainApplet.applet);
+		g.drawImage(temp, x, y, MainApplet.applet);
 		
 		if (stepX != 0 || stepY != 0) {
 			System.out.println("Player.paint :: step ("+stepX+"|"+stepY+")");
@@ -464,9 +465,6 @@ public class Player {
 				case 4 : stepY+=stepSize;break;
 			}
 		}
-		
-		
-		//g.fillOval(x,y, 30, 30);
 	}
 
 	public boolean addXP (String skill, int xp) {

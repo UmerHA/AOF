@@ -8,46 +8,68 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Server {
-	int port = 50000;
-	
-    JFrame frame = new JFrame("Server");
-    JTextField dataField = new JTextField(40);
-    JTextArea messageArea = new JTextArea(8, 60);
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 
-    ClientConnection[] connections = new ClientConnection[20];
+public class Server {
+
+	static int port = 50000;
+	static Dao<Player, String> playerDao;
+	static ConnectionSource dbConnectionSource;
+	
+    static JFrame frame = new JFrame("Server");
+    static JTextField dataField = new JTextField(40);
+    static JTextArea messageArea = new JTextArea(8, 60);
+
+    static List<ClientConnection> connections = new ArrayList<ClientConnection>();    
+    static List<Player> players = new ArrayList<Player>();
+
+    static Dao<Player, String> playerDao() {return playerDao;}
     
     public Server() throws IOException {
         // Layout GUI
         messageArea.setEditable(false);
-        frame.getContentPane().add(dataField, "North");
+        frame.getContentPane().add(dataField, "South");
         frame.getContentPane().add(new JScrollPane(messageArea), "Center");
     	
         // Add Listeners
         dataField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	send_message_to_client(dataField.getText(), 0);
+            	sendMessage(dataField.getText(), 0);
                 dataField.setText("");    	            	
             }
         });
     	
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);  // this will center the JFrame
         frame.setVisible(true);     	
+        
+        connectToDB();
         
         int clientNumber = 0;
         ServerSocket listener = new ServerSocket(port);
         
         try {
             while (true) {
-            	connections[clientNumber] =  new ClientConnection(listener.accept(), clientNumber, this);
-            	connections[clientNumber].start();
+            	ClientConnection newConnection = new ClientConnection(listener.accept(), clientNumber, this);
+            	
+            	connections.add(newConnection);
+            	players.add(new Player());
+            	
+            	newConnection.start();
             	
             	clientNumber++;
             }
@@ -56,14 +78,39 @@ public class Server {
         }
     }
     
-    void send_message_to_client(String message, int clientNumber) {
-    	connections[clientNumber].to_client.println(message);
+    void sendMessage(String message, int clientNumber) {
+    	connections.get(clientNumber).to_client.println(message);
         messageArea.append("To client " + clientNumber +  ": " + message + "\n");
     }
-	void receive_message_from_client(String message, int clientNumber) {
+	void receiveMessage(String message, int clientNumber) {
 		messageArea.append("From client " + clientNumber + ": " + message + "\n");
+		String response = Protocol.handle(message, clientNumber);
+		
+		if (response != null)
+			sendMessage(response, clientNumber);			
 	}
     
+	static void connectToDB() {
+		try {
+			String url = "jdbc:sqlite:src/data/players.db";
+
+			dbConnectionSource = new JdbcConnectionSource(url);
+
+			playerDao = DaoManager.createDao(dbConnectionSource, Player.class);
+			
+			TableUtils.createTableIfNotExists(dbConnectionSource, Player.class);
+			
+			System.out.println("Connection to SQLite has been established.");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	
+	
+	
     public static void main(String[] args) throws Exception {
         System.out.println("The server is now running.");
         new Server();
@@ -92,7 +139,7 @@ public class Server {
         public void run() {
             try {
                 // Send a welcome message to the client.
-                parent.send_message_to_client("Hello, you are client #" + clientNumber + ".", clientNumber);
+                parent.sendMessage("Hello, you are client #" + clientNumber + ".", clientNumber);
 
                 // Get messages from the client, line by line
                 while (true) {
@@ -100,7 +147,7 @@ public class Server {
                     if (input == null || input.equals(".")) {
                         break;
                     }
-                    parent.receive_message_from_client(input, clientNumber);
+                    parent.receiveMessage(input, clientNumber);
                 }
             } catch (IOException e) {
                 log("Error handling client# " + clientNumber + ": " + e);

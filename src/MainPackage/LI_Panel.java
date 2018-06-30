@@ -54,7 +54,7 @@ public class LI_Panel extends JComponent {
 	}
 
 	public void paint(Graphics g) {
-		//System.out.println("LI_Panel.paint :: painting");
+		System.out.println("LI_Panel.paint :: painting");
 				
 		if (debug) {
 			paintCount++;
@@ -91,12 +91,6 @@ public class LI_Panel extends JComponent {
 			String pw = new String(password.getPassword());
 
 			Connector.Send("Loin~"+uname+"~"+pw+"#");		
-			
-			/*
-			if (MainApplet.actPlayer.setIdentitiy(uname, pw)) {
-				MainApplet.map.create();
-				MainApplet.applet.setContentPanel(1);
-			}*/
 		}
 		
 	}
@@ -135,8 +129,8 @@ public class LI_Panel extends JComponent {
 			
 			if (e.isControlDown()) {
 				switch (e.getKeyCode()) {
-				case 78 : username.setText("Niels");password.setText("Jung");logInButton.doClick();break;
-				case 85 : username.setText("Umer");password.setText("Adil");logInButton.doClick();break;
+				case 78 : username.setText("niels");password.setText("jung");logInButton.doClick();break;
+				case 85 : username.setText("umer");password.setText("adil");logInButton.doClick();break;
 				}
 			}
 		}

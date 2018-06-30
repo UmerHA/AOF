@@ -29,6 +29,8 @@ import javax.swing.KeyStroke;
 public class VisualMapBuilder extends JFrame {
 	private static final long serialVersionUID = 1L;
 
+	public static final String PATH = "src/data/";
+	
 	//Components
 	private static JMenuBar menuBar;
 	private static JPanel west;

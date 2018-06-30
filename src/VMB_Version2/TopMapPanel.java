@@ -606,7 +606,7 @@ public class TopMapPanel extends JPanel {
 	}
 	public void saveBase() {
 		try {
-			String fileName = "bin/data/BaseData" + map.getMapLV();
+			String fileName = VisualMapBuilder.PATH + "BaseData" + map.getMapLV();
 
 			// delete and re-create file :
 			File aFile = new File(fileName);
@@ -651,7 +651,7 @@ public class TopMapPanel extends JPanel {
 	}
 	public void saveField() {
 		try {
-			String fileName = "bin/data/MapData" + map.getMapLV();
+			String fileName = VisualMapBuilder.PATH + "MapData" + map.getMapLV();
 
 			// delete and re-create file :
 			File aFile = new File(fileName);
@@ -693,7 +693,7 @@ public class TopMapPanel extends JPanel {
 	}
 	public void saveNPC() {
 		try {
-			String fileName = "bin/data/MonData" + map.getMapLV();
+			String fileName = VisualMapBuilder.PATH + "MonData" + map.getMapLV();
 
 			// delete and re-create file :
 			File aFile = new File(fileName);

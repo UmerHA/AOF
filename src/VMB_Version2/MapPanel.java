@@ -70,7 +70,7 @@ public class MapPanel extends JPanel {
 		short lines = 0;
 
 		try {
-			File file = new File("bin/data/BaseData"+ mapLV);
+			File file = new File(VisualMapBuilder.PATH + "BaseData"+ mapLV);
 			
 			FileInputStream fileStream = new FileInputStream(file);
 			DataInputStream dataStream = new DataInputStream(fileStream);
@@ -139,7 +139,7 @@ public class MapPanel extends JPanel {
 		short lines = 0;
 
 		try {
-			File file = new File("bin/data/MapData"+ mapLV);
+			File file = new File(VisualMapBuilder.PATH + "MapData"+ mapLV);
 			
 			FileInputStream fileStream = new FileInputStream(file);
 			DataInputStream dataStream = new DataInputStream(fileStream);
@@ -246,7 +246,7 @@ public class MapPanel extends JPanel {
 		short lines = 0;
 
 		try {
-			File file = new File("bin/data/MonData"+ mapLV);
+			File file = new File(VisualMapBuilder.PATH + "MonData"+ mapLV);
 			FileInputStream fileStream = new FileInputStream(file);
 			DataInputStream dataStream = new DataInputStream(fileStream);
 			BufferedReader fromFile = new BufferedReader(new InputStreamReader(

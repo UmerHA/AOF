@@ -194,11 +194,16 @@ public class ClientThread extends Thread {
 			try {
 				in = input.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// Server is down
+				MainApplet.applet.alert("Server is down");
+				System.exit(0);
 			}
-			if (in != null)
-				Handle(in);
+			if (in != null) {
+				String[] messages = in.split("#");
+				
+				for (int i = 0; i < messages.length; i++)
+			        Handle(messages[0]);
+			}
 		} while (true);
 	}
 }

@@ -31,7 +31,7 @@ public class OptionFrame extends JFrame {
 	private southPanel southP;
 	private buttonPanel buttonP;
 	
-	private final String path = "bin/data/vmbData";
+	private final String path = VisualMapBuilder.PATH + "vmbData";
 	
 	//default values:
 	private boolean baseShowField = false;

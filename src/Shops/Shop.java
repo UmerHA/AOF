@@ -1,8 +1,8 @@
-package Shops;
+package shops;
 
-import Items.Item;
-import MainPackage.MainApplet;
-import MainPackage.ShopPanel;
+import items.Item;
+import mainPackage.MainApplet;
+import mainPackage.ShopPanel;
 
 public class Shop {
 	private ShopPanel panel;
@@ -14,7 +14,7 @@ public class Shop {
 		panel.setName(name);
 		
 		for (int i=0;i<36;i++)
-			item[i] = new Items.Empty();
+			item[i] = new items.Empty();
 	}
 	
 	public Item getItem(int i) {

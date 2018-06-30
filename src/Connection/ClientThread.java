@@ -1,14 +1,14 @@
 // Listener Thread
 
-package Connection;
+package connection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import MainPackage.ExternalPlayer;
-import MainPackage.MainApplet;
+import mainPackage.ExternalPlayer;
+import mainPackage.MainApplet;
 
 public class ClientThread extends Thread {
 
@@ -56,9 +56,14 @@ public class ClientThread extends Thread {
 			}
 		}
 		
-		
+		// initialize all external players that where logged in when player logged in
 		if (data[0].equals("extinit")) {
+			String username = data[1];
+			int x = Integer.parseInt(data[2]);
+			int y = Integer.parseInt(data[3]);
+			int z = Integer.parseInt(data[4]);			
 			
+			ExternalPlayer.createNew(username, x, y, z);
 		}
 		
 		
@@ -139,12 +144,12 @@ public class ClientThread extends Thread {
 		/* INVENTORY/EQUIP-INVENTORY HANDLING */
 		if (data[0].equals("invl")) {
 			for (int i=0;i<30;i++) {
-				MainApplet.actPlayer.getInventoryManager().setItem(Items.Item.getItemByID(Integer.parseInt(data[i+1])), i);
+				MainApplet.actPlayer.getInventoryManager().setItem(items.Item.getItemByID(Integer.parseInt(data[i+1])), i);
 			}
 		}
 		if (data[0].equals("equil")) {
 			for (int i=0;i<10;i++) {
-				MainApplet.actPlayer.getInventoryManager().setItemEq(Items.Item.getItemByID(Integer.parseInt(data[i+1])), i);
+				MainApplet.actPlayer.getInventoryManager().setItemEq(items.Item.getItemByID(Integer.parseInt(data[i+1])), i);
 			}
 		}	
 		

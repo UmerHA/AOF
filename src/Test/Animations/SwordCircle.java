@@ -1,4 +1,4 @@
-package Test.Animations;
+package test.animations;
 
 /* This class was supposed to demonstrate the usage
  * of Java2D in animations. Unfortunately, Java2D can't be used at the moment;

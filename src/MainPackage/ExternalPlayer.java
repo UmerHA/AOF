@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.Graphics;
 import java.awt.Image;

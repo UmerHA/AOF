@@ -1,11 +1,11 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
-import TNPC.TNPC;
+import npc.TNPC;
 
 
 public class ConversationManager {

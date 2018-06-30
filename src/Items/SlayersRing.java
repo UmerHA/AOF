@@ -1,4 +1,4 @@
-package Items; 
+package items; 
 
 public class SlayersRing extends Item {
 	public SlayersRing() {

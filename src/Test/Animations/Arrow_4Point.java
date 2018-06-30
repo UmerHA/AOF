@@ -1,4 +1,4 @@
-package Test.Animations;
+package test.animations;
 
 import java.awt.Image;
 

@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -8,11 +8,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
+
+import connection.Connector;
+
 import javax.swing.JButton;
 
 import javax.swing.JLabel;
-
-import Connection.Connector;
 
 public class LI_Panel extends JComponent {
 	public static final long serialVersionUID = 1L;

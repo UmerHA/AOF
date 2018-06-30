@@ -1,4 +1,4 @@
-package LocalServer;
+package localServer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -28,6 +29,7 @@ public class Server {
 	static JFrame frame = new JFrame("Server");
 	static JTextField dataField = new JTextField(40);
 	static JTextArea messageArea = new JTextArea(8, 60);
+	static JScrollPane scrollableMessageArea = new JScrollPane(messageArea);
 
 	public static void main(String[] args) {
 		connectToDB();
@@ -61,7 +63,7 @@ public class Server {
 		// Layout GUI
 		messageArea.setEditable(false);
 		frame.getContentPane().add(dataField, "South");
-		frame.getContentPane().add(new JScrollPane(messageArea), "Center");
+		frame.getContentPane().add(scrollableMessageArea, "Center");
 
 		// Add Listeners
 		dataField.addActionListener(new ActionListener() {
@@ -77,7 +79,13 @@ public class Server {
 		frame.setVisible(true);
 
 	}
-
+	static void displayMessage(String message) {
+    	messageArea.append(message);
+    	
+    	JScrollBar vertical = scrollableMessageArea.getVerticalScrollBar();
+    	vertical.setValue( vertical.getMaximum() );
+	}
+	
 	public static List<Response> handle(String message, int clientNumber) throws NullPointerException {
 		message = message.toLowerCase();
 		String[] tokens = message.replace("#", "").split("~");

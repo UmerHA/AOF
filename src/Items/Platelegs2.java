@@ -1,4 +1,4 @@
-package Items;
+package items;
 
 public class Platelegs2 extends Item {
 	public Platelegs2 () {

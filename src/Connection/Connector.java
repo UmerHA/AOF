@@ -1,11 +1,11 @@
-package Connection;
+package connection;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import MainPackage.MainApplet;
+import mainPackage.MainApplet;
 
 public class Connector {
 	private final static boolean DEBUG = true;

@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import Items.Item;
+import items.Item;
 
 public class ShopSlot extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +24,7 @@ public class ShopSlot extends JPanel {
 		this.setBackground(new Color(135, 75, 50));
 		this.id = i;
 		addMouseListener(new mLis());
-		this.item = new Items.Empty();
+		this.item = new items.Empty();
 		this.manager = manager;
 		
 		setPreferredSize(new Dimension(50,75));

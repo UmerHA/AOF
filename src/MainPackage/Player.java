@@ -1,6 +1,5 @@
-package MainPackage;
+package mainPackage;
 
-import java.util.Calendar;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.BufferedReader;
@@ -8,10 +7,12 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 
-import Connection.Connector;
-import Items.Item;
-import Panels.InventoryManager;
+import connection.Connector;
+import items.Item;
+import npc.Monster;
+import panels.InventoryManager;
 
 public class Player {
 	String fileName;
@@ -69,7 +70,7 @@ public class Player {
 	/* other */
 	private boolean nameSet = false;//for update
 	private byte stepX, stepY;
-	private byte stepSize = 6;//must be a factor of 30 (field size)
+	//private byte stepSize = 6;//must be a factor of 30 (field size)
 	
 
 	public void setName(String name) {
@@ -346,7 +347,7 @@ public class Player {
 		
 	}
 	
-	public void startFightWith (Monster.Monster monster) {
+	public void startFightWith (Monster monster) {
 
 		//System.out.println(tempNPC);
 		cbWin = new CombatWindow(this, monster);
@@ -500,7 +501,7 @@ public class Player {
 		defence =  (short) XPLVconverter.getLV (defenceXP);
 	}
 	public void refreshFriendsList () {
-		Connection.Connector.Send("frlg~#");
+		connection.Connector.Send("frlg~#");
 	}
 	public void updateFriendsList (String[] friends) {//called by server
 		MainApplet.getGamePanel().chatScreen().setFriendData(friends);

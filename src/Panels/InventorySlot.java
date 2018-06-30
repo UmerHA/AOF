@@ -1,4 +1,4 @@
-package Panels;
+package panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,9 +12,9 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JPanel;
 
-import Connection.Connector;
-import Items.Item;
-import MainPackage.MainApplet;
+import connection.Connector;
+import items.Item;
+import mainPackage.MainApplet;
 
 public class InventorySlot extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public class InventorySlot extends JPanel {
 		if (isEnabled) {
 			return item.getImage();
 		} else {
-			return new Items.Empty().getImage();
+			return new items.Empty().getImage();
 		}
 	}
 

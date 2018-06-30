@@ -1,4 +1,4 @@
-package Panels;
+package panels;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
-import MainPackage.MainApplet;
+import mainPackage.MainApplet;
 
 public class ChatLabel extends JLabel {
 	private static final long serialVersionUID = 1L;

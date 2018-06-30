@@ -1,11 +1,11 @@
-package LocalServer;
+package localServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientConnector {
+class ClientConnector {
 
 	static int port = 50000;
 
@@ -40,10 +40,10 @@ public class ClientConnector {
     
     static void sendMessage(String message, int clientNumber) {
     	connections.get(clientNumber).to_client.println(message);
-    	Server.messageArea.append("To client " + clientNumber +  ": " + message + "\n");
+    	Server.displayMessage("To client " + clientNumber +  ": " + message + "\n");
     }
 	static void receiveMessage(String message, int clientNumber) {
-		Server.messageArea.append("From client " + clientNumber + ": " + message + "\n");
+		Server.displayMessage("From client " + clientNumber + ": " + message + "\n");
 		List<Response> responses = Server.handle(message, clientNumber);
 		
 		if (responses == null)

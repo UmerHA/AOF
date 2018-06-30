@@ -1,4 +1,4 @@
-package Panels;
+package panels;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -13,8 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import MainPackage.ExternalPlayer;
-import MainPackage.MainApplet;
+import mainPackage.ExternalPlayer;
+import mainPackage.MainApplet;
 
 public class OptionPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

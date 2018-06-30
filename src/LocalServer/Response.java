@@ -1,11 +1,11 @@
-package LocalServer;
+package localServer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Response {
+class Response {
 	public int clientNumber;
 	public String message;
 	

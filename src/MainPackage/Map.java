@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -9,11 +9,40 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import MapBases.*;
-import MapFields.*;
-import MapObjects.*;
-import Monster.*;
-import TNPC.*;
+import map.MapBase;
+import map.MapField;
+import map.mapBases.Grass;
+import map.mapBases.Nothing;
+import map.mapBases.Road;
+import map.mapBases.Underground;
+import map.mapFields.FenceEast;
+import map.mapFields.FenceNE;
+import map.mapFields.FenceNS;
+import map.mapFields.FenceNSE;
+import map.mapFields.FenceNSW;
+import map.mapFields.FenceNW;
+import map.mapFields.FenceNWE;
+import map.mapFields.FenceNorth;
+import map.mapFields.FenceSE;
+import map.mapFields.FenceSW;
+import map.mapFields.FenceSWE;
+import map.mapFields.FenceSouth;
+import map.mapFields.FenceWE;
+import map.mapFields.FenceWest;
+import map.mapFields.Lava;
+import map.mapFields.LavaHole;
+import map.mapFields.PlainField;
+import map.mapFields.Sand;
+import map.mapFields.Water;
+import map.mapFields.Water1;
+import map.mapFields.Water2;
+import map.mapFields.Wood;
+import map.mapObjects.LadderDown;
+import map.mapObjects.LadderUp;
+import map.mapObjects.Rock;
+import map.mapObjects.Tree;
+import map.mapObjects.TropicalTree;
+import npc.NPC;
 
 /* Map :
  *
@@ -284,50 +313,12 @@ public class Map {
 		String[] temp;
 		for (short i = 0; i < lines; i++) {
 			temp = data[i].split("~");
+			String name = temp[0];
 			int x = Integer.parseInt(temp[1]);
 			int y = Integer.parseInt(temp[2]);
 			int delay = Integer.parseInt(temp[3]);
 
-			//TNPC
-			if (temp[0].equals("Joe"))
-				npcs[i] = new Joe(x, y,i);	
-			if (temp[0].equals("Edward"))
-				npcs[i] = new Edward(x, y,i);
-			if (temp[0].equals("Adventurer"))
-				npcs[i] = new Adventurer(x,y,i);
-			if (temp[0].equals("Farmer"))
-				npcs[i] = new Farmer(x,y,i);
-			
-			//monster
-			if (temp[0].equals("Dragon"))
-				npcs[i] = new Dragon(x, y,i);
-			if (temp[0].equals("Demon"))
-				npcs[i] = new Demon(x, y,i);
-			if (temp[0].equals("Dude"))
-				npcs[i] = new Dude(x, y,i);;
-			if (temp[0].equals("Goblin"))
-				npcs[i] = new Goblin(x, y,i);
-			if (temp[0].equals("Chicken"))
-				npcs[i] = new Chicken(x, y,i);
-			if (temp[0].equals("kA"))
-				npcs[i] = new kA(x, y,i);
-			if (temp[0].equals("MithrilDragon"))
-				npcs[i] = new MithrilDragon(x, y,i);
-			if (temp[0].equals("Dog"))
-				npcs[i] = new Dog(x, y,i);
-			if (temp[0].equals("Phoenix"))
-				npcs[i] = new Phoenix(x, y,i);
-			if (temp[0].equals("BigGoblin"))
-				npcs[i] = new BigGoblin(x, y,i);
-			if (temp[0].equals("Ankou"))
-				npcs[i] = new Ankou(x, y,i);;
-			if (temp[0].equals("Big_kA"))
-				npcs[i] = new Big_kA(x, y,i);
-			if (temp[0].equals("Jad"))
-				npcs[i] = new Jad(x,y,i);
-			if (temp[0].equals("Sheep"))
-				npcs[i] = new Sheep(x,y,i);
-			// new NPC
+			npcs[i] = NPC.createNpcByName(name, x, delay, i);
 
 			Fields[x][y].take(i);
 			

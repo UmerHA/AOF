@@ -1,6 +1,6 @@
-package Items;
+package items;
 
-import MainPackage.MainApplet;
+import mainPackage.MainApplet;
 
 public class Coconut extends Item {
 	

@@ -1,4 +1,4 @@
-package Panels;
+package panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import Connection.Connector;
-import MainPackage.MainApplet;
+import connection.Connector;
+import mainPackage.MainApplet;
 
 public class InventoryEquipPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -70,7 +70,7 @@ public class InventoryEquipPanel extends JPanel {
 		
 		for (short i=0;i<10;i++) {
 			slots[i] = new InventorySlot(i);
-			slots[i].setItem(new Items.Empty());
+			slots[i].setItem(new items.Empty());
 			slots[i].setOption1("Unequip");
 			slots[i].setIsEquip(true);
 			slots[i].setBounds(slotX[i]+spcX,slotY[i]+spcY,50,75);

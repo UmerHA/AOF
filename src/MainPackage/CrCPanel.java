@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Connection.Connector;
+import connection.Connector;
 
 public class CrCPanel extends JComponent {
 	private static final long serialVersionUID = 1L;

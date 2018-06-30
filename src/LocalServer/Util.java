@@ -1,6 +1,6 @@
-package LocalServer;
+package localServer;
 
-public class Util {
+class Util {
 	public static void log(String string) {
 		System.out.println(string);
 	}	

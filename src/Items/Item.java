@@ -1,8 +1,8 @@
-package Items;
+package items;
 
 import java.awt.Image;
 
-import MainPackage.myObject;
+import mainPackage.myObject;
 
 public abstract class Item extends myObject {
 	public final static short maxNameLenght = 20;
@@ -39,7 +39,7 @@ public abstract class Item extends myObject {
 	}
 	
 	public Item(String picSrc) {
-		this.pic = MainPackage.MainApplet.applet.getImage(MainPackage.MainApplet.applet.getCodeBase(),picSrc);
+		this.pic = mainPackage.MainApplet.applet.getImage(mainPackage.MainApplet.applet.getCodeBase(),picSrc);
 	}
 
 	public static Item getItemByName(String str) {
@@ -93,7 +93,7 @@ public abstract class Item extends myObject {
 			return new HalfCoconut();
 		// new Item
 
-		return new Items.Empty();
+		return new items.Empty();
 	}
 
 	public void use() {	}

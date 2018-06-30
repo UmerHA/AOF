@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import Shops.Shop;
+import shops.Shop;
 
 public class ShopPanel extends CustomPanel {
 	private static final long serialVersionUID = 1L;
@@ -111,7 +111,7 @@ public class ShopPanel extends CustomPanel {
 			try {
 				slots[i].setItem(shop.getItem(i));
 			} catch (NullPointerException e) {
-				slots[i].setItem(new Items.Empty());
+				slots[i].setItem(new items.Empty());
 			}
 		}
 	}

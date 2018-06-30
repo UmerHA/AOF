@@ -1,4 +1,4 @@
-package Items;
+package items;
 
 public class Empty extends Item {
 

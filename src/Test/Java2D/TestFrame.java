@@ -1,4 +1,4 @@
-package Test.Java2D;
+package test.java2D;
 
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;

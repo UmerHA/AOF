@@ -1,5 +1,5 @@
 
-package Panels;
+package panels;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -12,8 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import Connection.Connector;
-import MainPackage.MainApplet;
+import connection.Connector;
+import mainPackage.MainApplet;
 
 public class ChatPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package Animations;
+package animations;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -25,8 +25,8 @@ public class Arrow extends AbstractAnimation {
 			
 	}
 	protected void loadImages () {
-		imgs[0] = MainPackage.MainApplet.getImage("Animations/Arrow/Arrow1.png");
-		imgs[1] = MainPackage.MainApplet.getImage("Animations/Arrow/Arrow2.png");
+		imgs[0] = mainPackage.MainApplet.getImage("Animations/Arrow/Arrow1.png");
+		imgs[1] = mainPackage.MainApplet.getImage("Animations/Arrow/Arrow2.png");
 	}
 
 	//just ignore

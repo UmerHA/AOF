@@ -1,4 +1,4 @@
-package Animations;
+package animations;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,7 +28,7 @@ public class SwordCircle extends AbstractAnimation {
 		g2.drawImage(imgs[0], at, this);
 	}
 	protected void loadImages () {
-		imgs[0] = MainPackage.MainApplet.getImage("Animations/SwordCircle/sword.png");
+		imgs[0] = mainPackage.MainApplet.getImage("Animations/SwordCircle/sword.png");
 	}
 
 	//just ignore

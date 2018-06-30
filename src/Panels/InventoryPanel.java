@@ -1,4 +1,4 @@
-package Panels;
+package panels;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,9 +10,9 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JPanel;
 
-import Connection.Connector;
-import Items.Item;
-import MainPackage.MainApplet;
+import connection.Connector;
+import items.Item;
+import mainPackage.MainApplet;
 
 public class InventoryPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

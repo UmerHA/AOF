@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import javax.swing.JPanel;
 import java.awt.*;

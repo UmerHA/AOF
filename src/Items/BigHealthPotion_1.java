@@ -1,6 +1,6 @@
-package Items;
+package items;
 
-import MainPackage.MainApplet;
+import mainPackage.MainApplet;
 
 public class BigHealthPotion_1 extends Item {
 	public BigHealthPotion_1() {
@@ -17,7 +17,7 @@ public class BigHealthPotion_1 extends Item {
 		MainApplet.addInfo("You drink a bit of the Health Potion.");
 		MainApplet.addInfo("You have used up your potion.");
 
-		MainPackage.Player pl = MainApplet.actPlayer;
+		mainPackage.Player pl = MainApplet.actPlayer;
 		pl.changeHP(10);
 		pl.getInventoryManager().destroyItem(this.slotID);
 	}

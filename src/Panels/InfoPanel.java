@@ -1,13 +1,14 @@
-package Panels;
+package panels;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 
-import MainPackage.MainApplet;
+import mainPackage.MainApplet;
+
+import javax.swing.JLabel;
 
 
 public class InfoPanel extends JPanel {

@@ -1,6 +1,6 @@
-package Shops;
+package shops;
 
-import Items.*;
+import items.*;
 
 public class FarmerShop extends Shop {
 

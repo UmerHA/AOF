@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -17,8 +17,9 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Animations.AnimationManager;
-import Connection.Connector;
+import animations.AnimationManager;
+import connection.Connector;
+import mainPackage.GamePanel.GamePanel;
 
 public class MainApplet extends JApplet {
 	private static final long serialVersionUID = 1L;
@@ -90,7 +91,6 @@ public class MainApplet extends JApplet {
 	private static Dimension dim;
 
 	public void init() {
-		XPLVconverter.init();
 		ANIManager = new AnimationManager();
 		loadImages();
 

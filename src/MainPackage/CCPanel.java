@@ -1,4 +1,4 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,7 +17,7 @@ import javax.swing.JFrame;//for test
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Connection.Connector;
+import connection.Connector;
 
 public class CCPanel extends JComponent {//CC = Char Choose
 	public static final long serialVersionUID = 1L;

@@ -1,11 +1,11 @@
-package MainPackage;
+package mainPackage;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import Monster.Monster;
+import npc.Monster;
 
 
 public class CombatWindow extends JFrame {

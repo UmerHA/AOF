@@ -1,29 +1,29 @@
-package Panels;
+package panels;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import Connection.Connector;
-import Items.Item;
-import MainPackage.MainApplet;
+import connection.Connector;
+import items.Item;
+import mainPackage.MainApplet;
 
 public class InventoryManager {
 
 	private Item[] items = new Item[30];	// inventory
 	private Item[] itemsEq = new Item[10];	// Equip Inventory
 	private Item[] itemsTr = new Item[12];	// Trade Inventory
-	private Item itemFly = new Items.Empty();	// Default für jeden Start
+	private Item itemFly = new items.Empty();	// Default für jeden Start
 	private short itemFlyOrigin = -1;//Default
 	
 	private boolean isShieldSlotEnabled = true;
 	
 	public InventoryManager () {
 		for (short i=0;i<30;i++)
-			items[i] = new Items.Empty();
+			items[i] = new items.Empty();
 		for (short i=0;i<10;i++)
-			itemsEq[i] = new Items.Empty();
+			itemsEq[i] = new items.Empty();
 		for (short i=0;i<12;i++)
-			itemsTr[i] = new Items.Empty();	
+			itemsTr[i] = new items.Empty();	
 	}
 	
 	public boolean isShieldSlotEnabled () {
@@ -61,7 +61,7 @@ public class InventoryManager {
 		if (items[position].getName().equals("")) // if there isn't any item at that position
 			return false;
 		
-		items[position] = new Items.Empty();
+		items[position] = new items.Empty();
 		MainApplet.getGamePanel().invScreen().refresh();
 		return true;
 	}

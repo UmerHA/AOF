@@ -25,8 +25,8 @@ public class Player {
 	public Player() {}
 	
 	public void setDefaultValues() {
-		this.x = "5";
-		this.y = "5";
+		this.x = "8";
+		this.y = "6";
 		this.z = "0";
 		this.maxHP = "100";
 		this.momHP = "100";

@@ -30,12 +30,15 @@ public class ClientThread extends Thread {
 		
 		
 		
-		if (data[0].equals("Loin")) {//Log in
+		if (data[0].equals("loin")) {//Log in
 			if (data[1].equals("dne")) {//done
+				// Format: loin~dne~x~y~z~name
 				MainApplet.map.create(data[2],data[3],data[4]);
 				MainApplet.applet.setContentPanel(1);
 				MainApplet.actPlayer.setData(data[2],data[3],data[4]);
+				MainApplet.actPlayer.setName(data[5]);
 				MainApplet.actPlayer.moveByServer();//to prevent player from being drawn at (8|6) {<- Default} at the beginning
+				
 			} else if (data[1].equals("bafo")) {//bad format
 				if (data[2].equals("un"))
 					MainApplet.applet.alert("Wrong username!");
@@ -67,11 +70,7 @@ public class ClientThread extends Thread {
 					MainApplet.actPlayer.setName(data[1]);								
 				
 				if (data[1].equals(MainApplet.actPlayer.getName())) {
-					//System.out.println("Update : name = "+data[1]);
-					//System.out.println("Update : x    = "+data[2]);
-					//System.out.println("Update : y    = "+data[3]);
-					//System.out.println("Update : mapLV= "+data[4]);
-			
+					/// x, y, z position
 					MainApplet.actPlayer.setData(data[2], data[3], data[4]);
 				} else {
 					//MainApplet.addInfo(data[1] + " just got updated.");

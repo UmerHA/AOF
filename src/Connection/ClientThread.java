@@ -40,8 +40,6 @@ public class ClientThread extends Thread {
 				MainApplet.actPlayer.moveByServer();//to prevent player from being drawn at (8|6) {<- Default} at the beginning
 				
 			} else if (data[1].equals("bafo")) {//bad format
-				if (data[2].equals("un"))
-					MainApplet.applet.alert("Wrong username!");
 				if (data[2].equals("pw"))
 					MainApplet.applet.alert("Wrong password!");
 			} else if (data[1].equals("nf")) {//not found
@@ -58,23 +56,31 @@ public class ClientThread extends Thread {
 			}
 		}
 		
+		
+		if (data[0].equals("extinit")) {
+			
+		}
+		
+		
 		if (data[0].equals("upd")) {//update
-			if (data[2].equals("on")) {
-				MainApplet.addInfo(data[1] + " is now online.");
-				ExternalPlayer.createNew(data[1]);
+			if (data[2].equals("on")) {		
+				String username = data[1];
+				int x = Integer.parseInt(data[3]);
+				int y = Integer.parseInt(data[4]);
+				int z = Integer.parseInt(data[5]);
+				
+				MainApplet.addInfo(username + " is now online.");
+				ExternalPlayer.createNew(username, x, y, z);
 			} else if (data[2].equals("ofl")) {
 				MainApplet.addInfo(data[1] + " is now offline.");
 				ExternalPlayer.destroy(data[1]);
-			} else {
-				if(MainApplet.actPlayer.getName().equals(""))
-					MainApplet.actPlayer.setName(data[1]);								
-				
+			} else {						
 				if (data[1].equals(MainApplet.actPlayer.getName())) {
 					/// x, y, z position
 					MainApplet.actPlayer.setData(data[2], data[3], data[4]);
 				} else {
 					//MainApplet.addInfo(data[1] + " just got updated.");
-					ExternalPlayer.setPosition(data[1], data[2], data[3], "0");
+					ExternalPlayer.setPosition(data[1], data[2], data[3], data[4]);
 				}
 			}
 		}	

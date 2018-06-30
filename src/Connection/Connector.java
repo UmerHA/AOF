@@ -22,7 +22,7 @@ public class Connector {
 		}
 
 		if (DEBUG)
-			System.out.println("Sending :" + str);
+			System.out.println("Sending: " + str);
 		
 		return true;
 	}

@@ -38,10 +38,10 @@ public class ExternalPlayer {
 	public String getOption2 () {return this.option2;}	
 	
 
-	public static void createNew(String name/*, String x, String y*/) {
+	public static void createNew(String name, int x, int y, int z) {
 		System.out.println("ExternalPlayer.creatingNew :: extPlNum = "+extPlNum);
 		
-		extPlayer[extPlNum] = new ExternalPlayer(name, 0, 0, 0);
+		extPlayer[extPlNum] = new ExternalPlayer(name, x, y, z);
 		extPlNum++;
 		
 		System.out.println("ExternalPlayer.createdNew :: extPlNum = "+extPlNum);
@@ -72,16 +72,21 @@ public class ExternalPlayer {
 		temp.name = "";
 		//MainApplet.map.repaint();
 	}
-	public static void setPosition(String name, String x, String y, String mapLV) {
+	public static void setPosition(String name, String x, String y, String z) {		
+		int mapX = Integer.parseInt(x);
+		int mapY = Integer.parseInt(y);
+		int mapZ = Integer.parseInt(z);
+		
 		ExternalPlayer temp = getPlayerByName(name);
 		if (temp == null) {
-			createNew (name);
+			createNew (name, mapX, mapY, mapZ);
 			temp = getPlayerByName(name);
 		}
 		
-		temp.mapX = Integer.parseInt(x);
-		temp.mapY = Integer.parseInt(y);
-		temp.mapLV = Integer.parseInt(mapLV);
+		temp.mapX = mapX;
+		temp.mapY = mapY;
+		temp.mapLV = mapZ;
+
 		//map.repaint();
 		
 		//debug

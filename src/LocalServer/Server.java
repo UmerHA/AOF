@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -100,6 +101,10 @@ public class Server {
 		return null;
 	}
 
+	static Stream<Integer> otherPlayerIds(int playerId) {
+		return ClientConnector.getPlayingClients().stream().filter((otherPlayerId) -> otherPlayerId != playerId);
+	}
+
 	static List<Response> login_response(String[] tokens, int clientNumber) {
 		String username = tokens[1];
 		String password = tokens[2];
@@ -115,13 +120,24 @@ public class Server {
 				// successful login
 				players.set(clientNumber, player);
 
-				List<Response> responsesForOtherPlayers = ClientConnector.getPlayingClients().stream()
-						.filter((otherClientNum) -> otherClientNum != clientNumber)
-						.map((otherClientNum) -> Response.create(otherClientNum, "upd", username, "on"))
+				String x = player.getX();
+				String y = player.getY();
+				String z = player.getZ();
+
+				// notify all other clients of this clients login
+				List<Response> notifyOtherPlayers = otherPlayerIds(clientNumber)
+						.map((otherClientNum) -> Response.create(otherClientNum, "upd", username, "on", x, y, z))
 						.reduce(Response.EMPTY, (r1, r2) -> Response.join(r1, r2));
 
-				return Response.join(Response.create(clientNumber, "loin", "dne", player.getX(), player.getY(),
-						player.getZ(), username), responsesForOtherPlayers);
+				// notify this client of all other active clients
+				List<Response> initExternalPlayers = otherPlayerIds(clientNumber).map((id) -> players.get(id)).map(
+						(p) -> Response.create(clientNumber, "extinit", p.getUsername(), p.getX(), p.getY(), p.getZ()))
+						.reduce(Response.EMPTY, (r1, r2) -> Response.join(r1, r2));
+
+				// notify this client that login is successful and pass position
+				List<Response> loginSuccessful = Response.create(clientNumber, "loin", "dne", x, y, z, username);
+
+				return Response.join(loginSuccessful, initExternalPlayers, notifyOtherPlayers);
 
 			} else
 				return Response.create(clientNumber, "loin", "bafo", "pw");
@@ -164,8 +180,7 @@ public class Server {
 		}
 		players.set(clientNumber, null);
 
-		List<Response> responses = ClientConnector.getPlayingClients().stream()
-				.filter((otherClientNum) -> otherClientNum != clientNumber)
+		List<Response> responses = otherPlayerIds(clientNumber)
 				.map((otherClientNum) -> Response.create(otherClientNum, "upd", username, "ofl"))
 				.reduce(Response.EMPTY, (r1, r2) -> Response.join(r1, r2));
 
@@ -188,13 +203,22 @@ public class Server {
 
 			String username = players.get(clientNumber).getUsername();
 
+			List<Response> responsesForOtherPlayers = otherPlayerIds(clientNumber)
+					.map(playerId -> Response.create(playerId, "upd", username, x, y, z))
+					.reduce(Response.EMPTY, (r1, r2) -> Response.join(r1, r2));
+
+			Util.log("Moving " + username + ". So I should update " + responsesForOtherPlayers.size()
+					+ " other players.");
+
 			return Response.join(Response.create(clientNumber, "upd", username, x, y, z),
-					Response.create(clientNumber, "mve", "dne"));
+					Response.create(clientNumber, "mve", "dne"), responsesForOtherPlayers);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-			return Response.create(clientNumber, ""); // TODO: Move not
-														// succesful
+			return Response.create(clientNumber, "Move not succesful"); // TODO:
+																		// Move
+																		// not
+			// succesful
 		}
 	}
 
@@ -203,8 +227,7 @@ public class Server {
 		String message = tokens[1];
 		String username = players.get(clientNumber).getUsername();
 
-		return ClientConnector.getPlayingClients().stream()
-				.filter((otherClientNumber) -> otherClientNumber != clientNumber)
+		return otherPlayerIds(clientNumber)
 				.map((otherClientNumber) -> Response.create(otherClientNumber, "mss", username, message))
 				.reduce(Response.EMPTY, (r1, r2) -> Response.join(r1, r2));
 	}

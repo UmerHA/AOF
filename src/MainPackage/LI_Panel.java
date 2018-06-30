@@ -54,7 +54,7 @@ public class LI_Panel extends JComponent {
 	}
 
 	public void paint(Graphics g) {
-		System.out.println("LI_Panel.paint :: painting");
+		//System.out.println("LI_Panel.paint :: painting");
 				
 		if (debug) {
 			paintCount++;

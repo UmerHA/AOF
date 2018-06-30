@@ -1,12 +1,7 @@
 package MainPackage;
 
-import javax.swing.JApplet;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-
-import Animations.AnimationManager;
-import Connection.Connector;
-
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,127 +12,146 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import javax.swing.JApplet;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import Animations.AnimationManager;
+import Connection.Connector;
+
 public class MainApplet extends JApplet {
 	private static final long serialVersionUID = 1L;
 
 	// private static Image[] npcPics; // to be used later
 	// private static Image[] fieldPics;// to be used later
-	private static byte activePanel = 0;
 	private static final int NUMBER_OF_PICS = 27;
 	private static final byte NUMBER_OF_CONTENT_PANELS = 4;
 	private static Image[] pics = new Image[100];
 	private static JComponent[] panels = new JComponent[NUMBER_OF_CONTENT_PANELS];
-	
-	//the map
+
+	private static CardLayout cardLayout;
+	private static JPanel cards;
+	private static String panelNames[] = { "LI Panel", "Game Panel", "CC Panel", "CrC Panel" };
+
+	// the map
 	public static Map map = new Map();
 
 	// the player
 	public static Player actPlayer;
 	public static boolean playerValid;
-	
+
 	// for non-static access
 	public static MainApplet applet;
 
 	// for chat box
 	private static String username;
+
 	public static void setUsername(String uname) {
 		username = uname;
 		System.out.println("Setting usename to " + username);
 	}
+
 	public static String getUsername() {
 		System.out.println("Getting usename " + username);
 		return username;
 	}
+
 	public static void addInfo(String info) {
 		((GamePanel) panels[1]).chatbox().output().addInfo(info);
 	}
+
 	public static void addRedInfo(String info) {
 		((GamePanel) panels[1]).chatbox().output().addRedInfo(info);
 	}
+
 	public static void addBlueInfo(String info) {
 		((GamePanel) panels[1]).chatbox().output().addBlueInfo(info);
 	}
+
 	public static void addGreenInfo(String info) {
 		((GamePanel) panels[1]).chatbox().output().addGreenInfo(info);
 	}
+
 	// the conversation manager
 	private static ConversationManager CVManager;
 	// the animations manager
 	private static AnimationManager ANIManager;
 	// <--
 
-	//for game loop
+	// for game loop
 	private boolean runFlag = true;
 	private final short PAINT_SPEED = 250;
-	//private final short TICK_SPEED = 250;
-	private long /*curP,*/curT, /*prevP,*/ prevT; //cur = current; prev = previous ; t = tick ; p = paint
-	
-	// for double buffering
-	private static Graphics bufferGraphics;
-	private static Image offscreen;
-	private static Dimension dim;
+	// private final short TICK_SPEED = 250;
+	private long /* curP, */ curT, /* prevP, */ prevT; // cur = current; prev =
+														// previous ; t = tick ;
+														// p = paint
 
+	// for double buffering
+	private static Dimension dim;
 
 	public void init() {
 		XPLVconverter.init();
 		ANIManager = new AnimationManager();
 		loadImages();
-		
+
 		applet = this;
 		dim = getSize();
-		//offscreen = createImage(dim.width, dim.height);
-		//bufferGraphics = offscreen.getGraphics();
+
 		actPlayer = new Player();
+
 		panels[0] = new LI_Panel();
 		panels[1] = new GamePanel();
 		panels[2] = new CCPanel();
 		panels[3] = new CrCPanel();
 
-		this.setContentPane(panels[0]);
-		//repaint();
-		
+		cardLayout = new CardLayout();
+		cards = new JPanel(cardLayout);
+
+		for (int i = 0; i < panelNames.length; i++)
+			cards.add(panels[i], panelNames[i]);
+
+		cardLayout.show(cards, panelNames[0]);
+
+		setLayout(new BorderLayout());
+		add(cards, "Center");
+
 		try {
 			Connector.start();
 		} catch (IOException e) {
 			System.err.println("Error with the connector");
 			e.printStackTrace();
 		}
-		
+
 		new thread().start();
 	}
-	
-	public void stop () {
+
+	public void stop() {
 		actPlayer.logOut();
 		Connector.Send("logout~#");
 	}
 
 	// Game (rather Paint) Loop
 	class thread extends Thread {
-		public void run () {
+		public void run() {
 			System.err.println("GameLoop started");
 			while (runFlag) {
 				curT = java.util.Calendar.getInstance().getTimeInMillis();
-				if (curT-prevT >= PAINT_SPEED) {
+				if (curT - prevT >= PAINT_SPEED) {
 					repaint();
-					//if (activePanel == 1) {
-					//	if (map != null)
-					//		map.repaint();
-					//}
+
 					prevT = curT;
 				}
 			}
 			System.exit(0);
 		}
 	}
-	
-	
-	
-	
-	private void loadImages () {
+
+	private void loadImages() {
 		/*
 		 * Images 2 - 17 are currently not in use.
 		 */
-		
+
 		pics[0] = getImage(getCodeBase(), "pics/SUBackPic.png");
 		pics[1] = getImage(getCodeBase(), "pics/CrC/CrCBackPic.png");
 		pics[2] = getImage(getCodeBase(), "pics/GUI/1.png");
@@ -166,21 +180,7 @@ public class MainApplet extends JApplet {
 		pics[25] = getImage(getCodeBase(), "pics/CC/Del Off.jpg");
 		pics[26] = getImage(getCodeBase(), "pics/CC/cross.png");
 		pics[27] = getImage(getCodeBase(), "pics/CC/cross left.png");
-		//System.out.println("MainApplet :: images loaded");
-	}
-
-	public void paint(Graphics g) {
-		if (bufferGraphics == null) {
-			offscreen = createImage(dim.width, dim.height);
-			bufferGraphics = offscreen.getGraphics();
-		} 
-			
-		//bufferGraphics.clearRect(0, 0, dim.width, dim.width);
-		System.out.println("Painting panel " + String.valueOf(activePanel));
-		panels[activePanel].paint(bufferGraphics);
-		
-		g.drawImage(offscreen, 0, 0, this);
-		ANIManager.paintAnimImages(g);
+		// System.out.println("MainApplet :: images loaded");
 	}
 
 	public void update(Graphics g) {
@@ -188,52 +188,45 @@ public class MainApplet extends JApplet {
 	}
 
 	public void setContentPanel(int i) {
-		if (i < 0)
-			return;
-		if (i > NUMBER_OF_CONTENT_PANELS)
+		if (i < 0 || i >= NUMBER_OF_CONTENT_PANELS)
 			return;
 
 		switch (i) {
-		case 0 :
+		case 0:
 			((LI_Panel) panels[0]).isNowActive();
 			break;
 		case 1:
 			((GamePanel) panels[1]).isNowActive();
-			((GamePanel) panels[1]).menuPanel().setActivePanel((byte)2);
+			((GamePanel) panels[1]).menuPanel().setActivePanel((byte) 2);
 			break;
 		case 2:
-			
+
 			break;
 		case 3:
-			((CrCPanel)panels[3]).isNowActive();
+			((CrCPanel) panels[3]).isNowActive();
 			break;
 		}
 
-		activePanel = (byte) i;
-		setContentPane(panels[i]);
-		invalidate();
-		validate();
+		System.err.println("Showing panel: " + panelNames[i]);
+		cardLayout.show(cards, panelNames[i]);
+		
+		//activePanel = (byte) i;
+		//setContentPane(panels[i]);
+		//invalidate();
+		//validate();
 	}
 
-	public static void setFlyingInfo (String info) {
+	public static void setFlyingInfo(String info) {
 		getGamePanel().chatbox().input().setText(info);
 	}
-	
+
 	/*
 	 * Images :
 	 * 
-	 * 0 : Background image of LogInPanel
-	 * 1 - 10 : ActionKeys' Images
-	 * 11 : AOF logo 
-	 * 12 : miniMap 
-	 * 13 : settings 
-	 * 14 : menu 
-	 * 15 : gameArea 
-	 * 16 : background image of the action keys 
-	 * 17 : image of inventory (for test)
-	 * 18 : Male   Pic (CrC)
-	 * 19 : Female Pic (CrC)
-	 * 20-22 : CC
+	 * 0 : Background image of LogInPanel 1 - 10 : ActionKeys' Images 11 : AOF
+	 * logo 12 : miniMap 13 : settings 14 : menu 15 : gameArea 16 : background
+	 * image of the action keys 17 : image of inventory (for test) 18 : Male Pic
+	 * (CrC) 19 : Female Pic (CrC) 20-22 : CC
 	 * 
 	 */
 	public static Image getImage(int id) {
@@ -248,12 +241,14 @@ public class MainApplet extends JApplet {
 			return null;
 		}
 	}
-	public static File getFile (String directory) {
+
+	public static File getFile(String directory) {
 		URL url = null;
 		try {
-			url = new URL(MainApplet.applet.getCodeBase(),directory);
+			url = new URL(MainApplet.applet.getCodeBase(), directory);
 		} catch (MalformedURLException e) {
-			//System.err.println("MainApplet.getFile : Error ("+e.toString()+") <-- but doesnt matter");
+			// System.err.println("MainApplet.getFile : Error ("+e.toString()+")
+			// <-- but doesnt matter");
 		}
 		URI uri = null;
 		try {
@@ -261,28 +256,32 @@ public class MainApplet extends JApplet {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
+
 		return new File(uri);
 	}
-	
-	//get Size
+
+	// get Size
 	public static int HEIGHT() {
 		return dim.height;
 	}
+
 	public static int WIDTH() {
 		return dim.width;
 	}
 
-	public static GamePanel getGamePanel () {
+	public static GamePanel getGamePanel() {
 		return (GamePanel) panels[1];
 	}
-	public static LI_Panel getLIPanel () {
+
+	public static LI_Panel getLIPanel() {
 		return (LI_Panel) panels[0];
 	}
-	public static CCPanel getCCPanel () {
+
+	public static CCPanel getCCPanel() {
 		return (CCPanel) panels[2];
 	}
-	public static CrCPanel getCrCPanel () {
+
+	public static CrCPanel getCrCPanel() {
 		return (CrCPanel) panels[3];
 	}
 
@@ -291,24 +290,25 @@ public class MainApplet extends JApplet {
 			CVManager = new ConversationManager();
 		return CVManager;
 	}
+
 	public static AnimationManager ANIManager() {
 		return ANIManager;
 	}
-	
+
 	// aiding methods
 	public static String parseString(short x) {
 		return String.valueOf((int) x);
 	}
+
 	public void alert(String message) {
-		JOptionPane.showMessageDialog(this, message, "AOF",
-				JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, message, "AOF", JOptionPane.PLAIN_MESSAGE);
 	}
+
 	public boolean confirm(String question) {
 		Object[] options = { "Yes", "No" };
 
-		int n = JOptionPane.showOptionDialog(this, question, "AOF",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-				options, options[0]);
+		int n = JOptionPane.showOptionDialog(this, question, "AOF", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
 		switch (n) {
 		case 0:
@@ -319,16 +319,17 @@ public class MainApplet extends JApplet {
 			return false;
 		}
 	}
+
 	public int yesnocancel(String question) {
-		int result = JOptionPane.showConfirmDialog(this, question, "AOF",
-				JOptionPane.YES_NO_CANCEL_OPTION);
+		int result = JOptionPane.showConfirmDialog(this, question, "AOF", JOptionPane.YES_NO_CANCEL_OPTION);
 		return result;
 	}
+
 	public int yesnocancel(String question, String title) {
-		int result = JOptionPane.showConfirmDialog(this, question, title,
-				JOptionPane.YES_NO_CANCEL_OPTION);
+		int result = JOptionPane.showConfirmDialog(this, question, title, JOptionPane.YES_NO_CANCEL_OPTION);
 		return result;
 	}
+
 	public static int getRandom(int min, int max) { // get random number from
 		// min to max
 		int difference = (max - min) + 1;
@@ -336,11 +337,12 @@ public class MainApplet extends JApplet {
 
 		return (r + min);
 	}
+
 	public static int toMapCoord(int x) {
 		return (int) Math.floor(x / 30) + 1;
 	}
 
-	public static Image getImage (String picPath) {
-		return applet.getImage(applet.getCodeBase(), "pics/"+picPath);
-	}	
+	public static Image getImage(String picPath) {
+		return applet.getImage(applet.getCodeBase(), "pics/" + picPath);
+	}
 }

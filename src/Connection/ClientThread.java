@@ -12,16 +12,17 @@ import mainPackage.MainApplet;
 
 public class ClientThread extends Thread {
 
-	private boolean DEBUG = true; // Debug für Umer :D
+	private boolean DEBUG = false; // Debug für Umer :D
 	private BufferedReader input;
 
-	protected int Handle(String in) {		
+	protected void Handle(String message) {		
 		if (DEBUG)
-			System.out.println("Handle:" + in);
+			System.out.println("Handle:" + message);
 		
-		String data[] = in.split("~");
+		String data[] = message.split("~");
 		
 		/*Handle data depending of prefix : */
+		try {
 		
 		if (data[0].equals("chars")) {
 			MainApplet.getCCPanel().setData(data);
@@ -137,7 +138,7 @@ public class ClientThread extends Thread {
 		/* FRIEND-LIST HANDLING*/
 		if (data[0].equals("frl")) {
 			
-			String names = in.substring(4,in.length());
+			String names = message.substring(4,message.length());
 			MainApplet.actPlayer.updateFriendsList (names.split("~"));
 		}
 		
@@ -184,8 +185,9 @@ public class ClientThread extends Thread {
 			MainApplet.addInfo("Your trading invitation has been accepted.");
 			MainApplet.getGamePanel().tradeScreen().setVisible(true,"a player");
 		}
-		
-		return 0;
+		} catch (NullPointerException e) {
+			System.err.println(message);
+		}
 	}
 
 	public ClientThread(Socket sock) throws IOException {

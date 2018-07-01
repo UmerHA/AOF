@@ -1,4 +1,4 @@
-package mainPackage.GamePanel;
+package mainPackage.gamePanel;
 
 import javax.swing.JPanel;
 

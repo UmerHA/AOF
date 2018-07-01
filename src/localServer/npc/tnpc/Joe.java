@@ -6,6 +6,6 @@ public class Joe extends NPC {
 	public Joe(int x, int y, int id) {
 		super(x, y, id);
 		this.walkingRadius = 3;
-		this.sleepingTime = 1200;
+		this.sleepingTime = 500;
 	}
 }

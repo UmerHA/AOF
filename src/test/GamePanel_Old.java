@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 
 import mainPackage.MainApplet;
 import mainPackage.PanelWithBackPic;
-import mainPackage.GamePanel.ChatBox;
-import mainPackage.GamePanel.FieldPanel;
+import mainPackage.gamePanel.ChatBox;
+import mainPackage.gamePanel.FieldPanel;
 
 public class GamePanel_Old extends JPanel{
 	private static final long serialVersionUID = 1L;

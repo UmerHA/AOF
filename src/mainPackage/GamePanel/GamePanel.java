@@ -1,4 +1,4 @@
-package mainPackage.GamePanel;
+package mainPackage.gamePanel;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
@@ -9,8 +9,8 @@ import javax.swing.JLayeredPane;
 import mainPackage.CustomPanel;
 import mainPackage.MainApplet;
 import mainPackage.ShopPanel;
-import mainPackage.Trade.TradeInvitation;
-import mainPackage.Trade.TradePanel;
+import mainPackage.trade.TradeInvitation;
+import mainPackage.trade.TradePanel;
 import panels.ChatPanel;
 import panels.InfoPanel;
 import panels.InventoryEquipPanel;

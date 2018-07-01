@@ -1,4 +1,4 @@
-package mainPackage.Trade;
+package mainPackage.trade;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

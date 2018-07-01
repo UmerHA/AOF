@@ -5,17 +5,13 @@ import npc.Monster;
 public class Phoenix extends Monster {
 
 	public Phoenix(int x, int y, int id) {
-		super(x, y, id,"pics/monster/small/Phoenix_30.png");
+		super(x, y, id,"Phoenix_30.png");
 		this.atack = 60;
 		this.defence = 40;
 		this.examineText = "Reborn from the ash.";
 		this.max_hp = 150;
 		this.mom_hp = 150;
-		this.name = "Phoenix";
-		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage(
-				"pics/monster/small/Phoenix_100.png");
-		this.walkingRadius = 10;
-		this.sleepingTime = 1000;
+		this.Img100 = getImage100("Phoenix_100.png");
 		this.regenHP = 5;
 		this.regenTime = 500;
 		this.spawnTime = 2500;

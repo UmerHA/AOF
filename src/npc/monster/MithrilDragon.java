@@ -5,17 +5,14 @@ import npc.Monster;
 public class MithrilDragon extends Monster {
 
 	public MithrilDragon(int x, int y, int id) {
-		super(x, y, id,"pics/monster/small/MithrilDragon_30.gif");
+		super(x, y, id,"MithrilDragon_30.gif");
 		this.atack = 140;
 		this.defence = 145;
 		this.examineText = "A dragon made out of pure mithril !";
 		this.max_hp = 245;
 		this.mom_hp = 245;
-		this.name = "MithrilDragon";
-		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage(
-				"pics/monster/small/MithrilDragon_100.gif");
-		this.walkingRadius = 6;
-		this.sleepingTime = 500;
+		this.name = "Mithril Dragon";
+		this.Img100 = getImage100("MithrilDragon_100.gif");
 		this.regenHP = 20;
 		this.regenTime = 5000;
 		this.spawnTime = 15000;

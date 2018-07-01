@@ -14,8 +14,6 @@ public class NPC extends myObject {
 	protected Image Img100;
 	protected Image Img30;
 	public static Image deadImage = Toolkit.getDefaultToolkit().getImage("pics/monster/small/dead.png");
-	protected int walkingRadius;
-	protected int sleepingTime;
 	
 	// position on current player's map
 	public int posX; 
@@ -56,7 +54,8 @@ public class NPC extends myObject {
 	public String getOption1 () {return this.option1;}
 	public String getOption2 () {return this.option2;}	
 	
-	public NPC (int x,int y, int id, String picPath) {
+	public NPC (int x,int y, int id, String imageName) {
+		super();
 		this.id = id;
 		this.spawnX = x;
 		this.spawnY = y;
@@ -65,19 +64,15 @@ public class NPC extends myObject {
 		this.posX = x;
 		this.posY = y;
 		
+		String imagePath = "pics/monster/small/" + imageName;
+		
 		try {
 			//vom Applet laden
-			this.Img30 = MainApplet.applet.getImage(MainApplet.applet.getCodeBase(), picPath);
+			this.Img30 = MainApplet.applet.getImage(MainApplet.applet.getCodeBase(), imagePath);
 		} catch (NullPointerException e) {
 			//normal laden , da der VMB ausgeführt wird
-			this.Img30 = java.awt.Toolkit.getDefaultToolkit().getImage("bin/"+picPath);
+			this.Img30 = java.awt.Toolkit.getDefaultToolkit().getImage("bin/"+imagePath);
 		}
-	}
-	public void setRadius (int i) {
-		this.walkingRadius = i;
-	}
-	public void setSpeed (int pause) {
-		this.sleepingTime = pause;
 	}
 	public void setDelay (int delay) {
 		this.delay = delay;
@@ -87,12 +82,14 @@ public class NPC extends myObject {
 	/* - */
 	
 	public void moveByServer (int x, int y) {
-		System.out.println("["+id+"] moving to "+x+"|"+y);
+		MainApplet.map.fields[mapX][mapY].free();
+		
 		mapX = x;
 		mapY = y;
 		
 		recalcPosXY();
-		//MainApplet.getGamePanel().repaint();
+
+		MainApplet.map.fields[mapX][mapY].take(id);
 	}
 
 
@@ -143,9 +140,5 @@ public class NPC extends myObject {
 	public void recalcPosXY() {		
 		posX = Map.transformToPosX(mapX);
 		posY = Map.transformToPosY(mapY);
-
-//		System.out.println("NPC.recalcPosXY: (mapX|mapY) = (" + String.valueOf(mapX) + "|" + String.valueOf(mapY) + ")");
-//		System.out.println("NPC.recalcPosXY: (posX|posY) = (" + String.valueOf(posX) + "|" + String.valueOf(posY) + ")");
-//		System.out.println("");
 	}
 }

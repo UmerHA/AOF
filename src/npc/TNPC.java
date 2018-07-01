@@ -9,8 +9,8 @@ public class TNPC extends NPC {
 	protected ConversationManager CVM;
 	protected ShopPanel Shop;//this allows talking npcs to open shops
 	
-	public TNPC(int x, int y, int id, String picPath) {
-		super(x, y, id, picPath);
+	public TNPC(int x, int y, int id, String imageName) {
+		super(x, y, id, imageName);
 		this.option1 = "Talk to";
 		try {
 			Shop = MainApplet.getGamePanel().shopScreen();

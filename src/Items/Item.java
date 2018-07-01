@@ -39,6 +39,7 @@ public abstract class Item extends myObject {
 	}
 	
 	public Item(String picSrc) {
+		super();
 		this.pic = mainPackage.MainApplet.applet.getImage(mainPackage.MainApplet.applet.getCodeBase(),picSrc);
 	}
 

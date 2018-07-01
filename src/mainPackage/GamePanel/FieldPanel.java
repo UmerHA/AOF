@@ -56,8 +56,8 @@ public class FieldPanel extends JPanel {
 				NPC temp = MainApplet.map.getOwner(mx, my);
 				info += "  : {"+temp.getOption1()+" / "+temp.getOption2()+"}";
 			}
-			if (MainApplet.map.Fields[mx][my].isObject()) {
-				MapObject temp = (MapObject) MainApplet.map.Fields[mx][my];
+			if (MainApplet.map.fields[mx][my].isObject()) {
+				MapObject temp = (MapObject) MainApplet.map.fields[mx][my];
 				info += " {"+temp.getOption1()+" / examine}";
 			}
 			
@@ -96,8 +96,8 @@ public class FieldPanel extends JPanel {
 				return;
 			}
 			
-			if (MainApplet.map.Fields[mx][my].isObject()) {
-				MapObject temp = (MapObject) MainApplet.map.Fields[mx][my];
+			if (MainApplet.map.fields[mx][my].isObject()) {
+				MapObject temp = (MapObject) MainApplet.map.fields[mx][my];
 				
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					temp.examine();

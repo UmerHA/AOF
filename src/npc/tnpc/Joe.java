@@ -6,11 +6,8 @@ import npc.TNPC;
 
 public class Joe extends TNPC {
 	public Joe(int x, int y, int id) {
-		super(x, y, id, "pics/monster/small/joe.png");
+		super(x, y, id, "joe.png");
 		this.examineText = "It's just an average joe.";
-		this.name = "Joe";
-		this.walkingRadius = 3;
-		this.sleepingTime = 1200;
 	}
 
 	public void use() {

@@ -5,16 +5,13 @@ import npc.Monster;
 public class Goblin extends Monster {
 	
 	public Goblin (int x,int y,int id) {
-		super(x,y,id,"pics/monster/small/goblin_30.gif");
+		super(x,y,id,"goblin_30.gif");
 		this.atack = 1;
 		this.defence = 0;
 		this.examineText = "Green and ugly ...";
 		this.max_hp = 15;
 		this.mom_hp = 15;
-		this.name = "Goblin";
-		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage("pics/monster/small/goblin_100.png");
-		this.walkingRadius = 3;
-		this.sleepingTime = 1700;
+		this.Img100 = getImage100("goblin_100.png");
 		this.regenHP = 5;
 		this.regenTime = 60000;
 		this.spawnTime = 25000;

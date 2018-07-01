@@ -4,16 +4,13 @@ import npc.Monster;
 
 public class Sheep extends Monster {
 	public Sheep (int x,int y,int id) {
-		super(x,y,id,"pics/monster/small/sheep_30.png");
+		super(x,y,id,"sheep_30.png");
 		this.atack = 1;
 		this.defence = 0;
 		this.examineText = "White and sheepy.";
 		this.max_hp = 8;
 		this.mom_hp = 8;
-		this.name = "Sheep";
-		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage("pics/monster/small/sheep_100.png");
-		this.walkingRadius = 2;
-		this.sleepingTime = 1200; 
+		this.Img100 = getImage100("sheep_100.png");
 		this.regenHP = 1;
 		this.regenTime = 15000;
 		this.spawnTime = 60000;

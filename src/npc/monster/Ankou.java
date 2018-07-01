@@ -5,17 +5,13 @@ import npc.Monster;
 public class Ankou extends Monster {
 
 	public Ankou(int x, int y, int id) {
-		super(x, y, id,"pics/monster/small/Ankou_30.gif");
+		super(x, y, id,"Ankou_30.gif");
 		this.atack = 19;
 		this.defence = 5;
 		this.examineText = "This is a monster we stole from RuneScape, but don't tell anyone !";
 		this.max_hp = 80;
 		this.mom_hp = 80;
-		this.name = "Ankou";
-		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage(
-				"pics/monster/small/Ankou_100.gif");
-		this.walkingRadius = 7;
-		this.sleepingTime = 2000;
+		this.Img100 = getImage100("Ankou_100.gif");
 		this.regenHP = 5;
 		this.regenTime = 2000;
 		this.spawnTime = 5000;

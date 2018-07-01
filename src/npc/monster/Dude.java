@@ -4,16 +4,13 @@ import npc.Monster;
 
 public class Dude extends Monster {
 	public Dude (int x,int y, int id) {
-		super(x,y,id,"pics/monster/small/dude_30.png");
+		super(x,y,id,"dude_30.png");
 		this.atack = 5;
 		this.defence = 1;
 		this.examineText = "Who's this ?";
 		this.max_hp = 100;
 		this.mom_hp = 100;
-		this.name = "Dude";
-		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage("pics/monster/small/dude_100.png");
-		this.walkingRadius = 10;
-		this.sleepingTime = 1200; // 50
+		this.Img100 = getImage100("dude_100.png");
 		this.regenHP = 25;
 		this.regenTime = 15000;
 		this.spawnTime = 45000;

@@ -55,8 +55,8 @@ public class Map {
 
 	public static final int mapSize = 150;
 
-	private MapBase[] Bases[] = new MapBase[mapSize][mapSize];
-	public MapField[] Fields[] = new MapField[mapSize][mapSize];
+	private MapBase[] bases[] = new MapBase[mapSize][mapSize];
+	public MapField[] fields[] = new MapField[mapSize][mapSize];
 
 	private int mapX = 0;
 	private int mapY = 0;
@@ -81,7 +81,7 @@ public class Map {
 
 		for (short i = 0; i < mapSize; i++) {
 			for (short j = 0; j < mapSize; j++) {
-				Fields[i][j] = new PlainField(i, j);
+				fields[i][j] = new PlainField(i, j);
 			}
 		}
 
@@ -93,7 +93,7 @@ public class Map {
 		createMonFromFile();
 		System.out.println("MapPanel.create :: created all map items");
 
-		currentField = Fields[x][y];
+		currentField = fields[x][y];
 		// repaint();
 	}
 
@@ -139,13 +139,13 @@ public class Map {
 			for (short j = 0; j < mapSize; j++) {
 
 				if (dat.equals("Grass"))
-					Bases[i][j] = new Grass(i, j);
+					bases[i][j] = new Grass(i, j);
 				if (dat.equals("Road"))
-					Bases[i][j] = new Road(i, j);
+					bases[i][j] = new Road(i, j);
 				if (dat.equals("Underground"))
-					Bases[i][j] = new Underground(i, j);
+					bases[i][j] = new Underground(i, j);
 				if (dat.equals("Nothing"))
-					Bases[i][j] = new Nothing(i, j);
+					bases[i][j] = new Nothing(i, j);
 			}
 		}
 
@@ -157,13 +157,13 @@ public class Map {
 			int y = Integer.parseInt(temp[2]);
 
 			if (temp[0].equals("Grass"))
-				Fields[x][y] = new Wood(x, y);
+				fields[x][y] = new Wood(x, y);
 			if (temp[0].equals("Road"))
-				Fields[x][y] = new Road(x, y);
+				fields[x][y] = new Road(x, y);
 			if (temp[0].equals("Underground"))
-				Bases[x][y] = new Underground(x, y);
+				bases[x][y] = new Underground(x, y);
 			if (temp[0].equals("Nothing"))
-				Bases[x][y] = new Nothing(x, y);
+				bases[x][y] = new Nothing(x, y);
 
 			// new Base
 		}
@@ -209,70 +209,70 @@ public class Map {
 
 			// map base
 			if (temp[0].equals("Lava"))
-				Fields[x][y] = new Lava(x, y);
+				fields[x][y] = new Lava(x, y);
 			if (temp[0].equals("Water"))
-				Fields[x][y] = new Water(x, y);
+				fields[x][y] = new Water(x, y);
 			if (temp[0].equals("Water1"))
-				Fields[x][y] = new Water1(x, y);
+				fields[x][y] = new Water1(x, y);
 			if (temp[0].equals("Water2"))
-				Fields[x][y] = new Water2(x, y);
+				fields[x][y] = new Water2(x, y);
 			if (temp[0].equals("Sand"))
-				Fields[x][y] = new Sand(x, y);
+				fields[x][y] = new Sand(x, y);
 			if (temp[0].equals("Rock"))
-				Fields[x][y] = new Rock(x, y);
+				fields[x][y] = new Rock(x, y);
 			if (temp[0].equals("Wood"))
-				Fields[x][y] = new Wood(x, y);
+				fields[x][y] = new Wood(x, y);
 
 			// map object
 			if (temp[0].equals("LadderUp"))
-				Fields[x][y] = new LadderUp(x, y);
+				fields[x][y] = new LadderUp(x, y);
 			if (temp[0].equals("LadderDown"))
-				Fields[x][y] = new LadderDown(x, y);
+				fields[x][y] = new LadderDown(x, y);
 			if (temp[0].equals("Tree"))
-				Fields[x][y] = new Tree(x, y);
+				fields[x][y] = new Tree(x, y);
 			if (temp[0].equals("TropicalTree"))
-				Fields[x][y] = new TropicalTree(x, y);
+				fields[x][y] = new TropicalTree(x, y);
 
 			// special
 			if (temp[0].equals("Plain"))
-				Fields[x][y] = new PlainField(x, y);
+				fields[x][y] = new PlainField(x, y);
 			if (temp[0].equals("SpawnField"))
-				Fields[x][y] = new TropicalTree(x, y);
+				fields[x][y] = new TropicalTree(x, y);
 			if (temp[0].equals("LavaHole"))
-				Fields[x][y] = new LavaHole(x, y);
+				fields[x][y] = new LavaHole(x, y);
 
 			// Fences :
 			// 1-Line
 			if (temp[0].equals("FenceNorth"))
-				Fields[x][y] = new FenceNorth(x, y);
+				fields[x][y] = new FenceNorth(x, y);
 			if (temp[0].equals("FenceSouth"))
-				Fields[x][y] = new FenceSouth(x, y);
+				fields[x][y] = new FenceSouth(x, y);
 			if (temp[0].equals("FenceEast"))
-				Fields[x][y] = new FenceEast(x, y);
+				fields[x][y] = new FenceEast(x, y);
 			if (temp[0].equals("FenceWest"))
-				Fields[x][y] = new FenceWest(x, y);
+				fields[x][y] = new FenceWest(x, y);
 			// 2-Line
 			if (temp[0].equals("FenceNE"))
-				Fields[x][y] = new FenceNE(x, y);
+				fields[x][y] = new FenceNE(x, y);
 			if (temp[0].equals("FenceNW"))
-				Fields[x][y] = new FenceNW(x, y);
+				fields[x][y] = new FenceNW(x, y);
 			if (temp[0].equals("FenceNS"))
-				Fields[x][y] = new FenceNS(x, y);
+				fields[x][y] = new FenceNS(x, y);
 			if (temp[0].equals("FenceSE"))
-				Fields[x][y] = new FenceSE(x, y);
+				fields[x][y] = new FenceSE(x, y);
 			if (temp[0].equals("FenceSW"))
-				Fields[x][y] = new FenceSW(x, y);
+				fields[x][y] = new FenceSW(x, y);
 			if (temp[0].equals("FenceWE"))
-				Fields[x][y] = new FenceWE(x, y);
+				fields[x][y] = new FenceWE(x, y);
 			// 3-line
 			if (temp[0].equals("FenceNSE"))
-				Fields[x][y] = new FenceNSE(x, y);
+				fields[x][y] = new FenceNSE(x, y);
 			if (temp[0].equals("FenceNSW"))
-				Fields[x][y] = new FenceNSW(x, y);
+				fields[x][y] = new FenceNSW(x, y);
 			if (temp[0].equals("FenceNWE"))
-				Fields[x][y] = new FenceNWE(x, y);
+				fields[x][y] = new FenceNWE(x, y);
 			if (temp[0].equals("FenceSWE"))
-				Fields[x][y] = new FenceSWE(x, y);
+				fields[x][y] = new FenceSWE(x, y);
 
 			// new Field
 		}
@@ -314,7 +314,7 @@ public class Map {
 
 			npcs[i] = NPC.createNpcByName(name, x, y, i);
 
-			Fields[x][y].take(i);
+			fields[x][y].take(i);
 
 			try {
 				// npcs[i].setActive(delay);
@@ -337,9 +337,9 @@ public class Map {
 
 		for (short i = 0; i < maxFieldsX + 2; i++) {
 			for (short j = 0; j < maxFieldsY + 2; j++) {
-				g.drawImage(Bases[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
+				g.drawImage(bases[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
 						MainApplet.applet);
-				g.drawImage(Fields[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
+				g.drawImage(fields[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
 						MainApplet.applet);
 			}
 		}
@@ -387,7 +387,7 @@ public class Map {
 		}
 
 		currentField.exited();
-		currentField = Fields[x][y];
+		currentField = fields[x][y];
 		currentField.entered();
 
 		// MainProg.GameWin.setTitle("Current Position : " + x + " | " + y);
@@ -427,7 +427,7 @@ public class Map {
 	}
 
 	public String getNameOfField(int x, int y) {
-		return Fields[x][y].getName();
+		return fields[x][y].getName();
 	}
 
 	public void incrNPCNum() {
@@ -474,13 +474,13 @@ public class Map {
 			return -1;
 		}
 
-		if (!MainApplet.map.Fields[x][y].checkAccessible(dir)) {
+		if (!MainApplet.map.fields[x][y].checkAccessible(dir)) {
 			// System.out.println("Map.checkMove :: start field is not
 			// leavable");
 			return 0;
 		}
 
-		if (!MainApplet.map.Fields[tempMapX][tempMapY].checkAccessible(tempDir)) {
+		if (!MainApplet.map.fields[tempMapX][tempMapY].checkAccessible(tempDir)) {
 			// System.out.println("Map.checkMove :: goal field is not
 			// accessable");
 			return 0;
@@ -489,7 +489,7 @@ public class Map {
 	}
 
 	public String getNameOfOwner(int x, int y) {
-		int id_of_owner = Fields[x][y].getOwnerID();
+		int id_of_owner = fields[x][y].getOwnerID();
 		if (id_of_owner == -1)
 			return "";
 
@@ -497,7 +497,7 @@ public class Map {
 	}
 
 	public NPC getOwner(int x, int y) {
-		int id_of_owner = Fields[x][y].getOwnerID();
+		int id_of_owner = fields[x][y].getOwnerID();
 		if (id_of_owner > -1) {
 			return npcs[id_of_owner];
 		} else {
@@ -521,7 +521,7 @@ public class Map {
 		// clear arrays :
 		for (short i = 0; i < mapSize; i++) {
 			for (short j = 0; j < mapSize; j++) {
-				Fields[i][j] = new PlainField(i, j);
+				fields[i][j] = new PlainField(i, j);
 			}
 		}
 		for (int i = 0; i < 100; i++) {

@@ -5,11 +5,8 @@ import npc.TNPC;
 public class Farmer extends TNPC {
 
 	public Farmer(int x, int y, int id) {
-		super(x, y, id, "pics/monster/small/joe.png");
+		super(x, y, id, "joe.png");
 		this.examineText = "Howdy mate. Wanna buy some potatoes?";
-		this.name = "Farmer";
-		this.walkingRadius = 2;
-		this.sleepingTime = 1200;
 	}
 
 	public void use () {

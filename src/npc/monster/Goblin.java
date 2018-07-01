@@ -14,7 +14,7 @@ public class Goblin extends Monster {
 		this.name = "Goblin";
 		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage("pics/monster/small/goblin_100.png");
 		this.walkingRadius = 3;
-		this.sleepingTime = 1750; // 150
+		this.sleepingTime = 1700;
 		this.regenHP = 5;
 		this.regenTime = 60000;
 		this.spawnTime = 25000;

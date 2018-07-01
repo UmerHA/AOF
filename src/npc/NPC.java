@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import mainPackage.MainApplet;
+import mainPackage.Map;
 import mainPackage.myObject;
 import npc.monster.*;
 import npc.tnpc.*;
@@ -16,8 +17,10 @@ public class NPC extends myObject {
 	protected int walkingRadius;
 	protected int sleepingTime;
 	
-	public int posX;
+	// position on current player's map
+	public int posX; 
 	public int posY;
+	// position in real map
 	protected int mapX;
 	protected int mapY;
 	protected int spawnX;
@@ -87,6 +90,8 @@ public class NPC extends myObject {
 		System.out.println("["+id+"] moving to "+x+"|"+y);
 		mapX = x;
 		mapY = y;
+		
+		recalcPosXY();
 		//MainApplet.getGamePanel().repaint();
 	}
 
@@ -133,5 +138,14 @@ public class NPC extends myObject {
 			return new Sheep(x,y, id);
 		
 		return null;
+	}
+	
+	public void recalcPosXY() {		
+		posX = Map.transformToPosX(mapX);
+		posY = Map.transformToPosY(mapY);
+
+//		System.out.println("NPC.recalcPosXY: (mapX|mapY) = (" + String.valueOf(mapX) + "|" + String.valueOf(mapY) + ")");
+//		System.out.println("NPC.recalcPosXY: (posX|posY) = (" + String.valueOf(posX) + "|" + String.valueOf(posY) + ")");
+//		System.out.println("");
 	}
 }

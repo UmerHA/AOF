@@ -108,8 +108,8 @@ public class MapField {
 		return this.takenBy;
 	}
 	public String getName () {
-		String temp = this.getClass().toString();
-		return temp.substring(16, temp.length());
+		String[] tmp = this.getClass().toString().split("\\.");
+		return tmp[tmp.length -1];
 	}
 	public boolean isObject() {
 		return this.isObject ;

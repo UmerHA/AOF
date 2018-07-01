@@ -16,7 +16,6 @@ public class kA extends Monster {
 				"pics/monster/small/kA_100.png");
 		this.walkingRadius = 2;
 		this.sleepingTime = 5000;
-		this.sleepingTime = 2500; // delete this line after test
 		this.regenHP = 3;
 		this.regenTime = 5000;
 		this.spawnTime = 2500;

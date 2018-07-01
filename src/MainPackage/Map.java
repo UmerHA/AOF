@@ -54,10 +54,10 @@ import npc.NPC;
 public class Map {
 
 	public static final int mapSize = 150;
-	
+
 	private MapBase[] Bases[] = new MapBase[mapSize][mapSize];
 	public MapField[] Fields[] = new MapField[mapSize][mapSize];
-	
+
 	private int mapX = 0;
 	private int mapY = 0;
 	private byte mapLV = 0;
@@ -67,15 +67,15 @@ public class Map {
 
 	private MapField currentField;
 
-	private NPC[] npcs = new NPC[mapSize*mapSize];
+	private NPC[] npcs = new NPC[mapSize * mapSize];
 	private int npcNum = 0;
 
 	/* - Create the map */
-	public void create (String X, String Y, String Z) {
+	public void create(String X, String Y, String Z) {
 		int x = Integer.parseInt(X);
 		int y = Integer.parseInt(Y);
 		mapLV = Byte.parseByte(Z);
-		
+
 		mapX = (short) MainApplet.actPlayer.mapXofMap;
 		mapY = (short) MainApplet.actPlayer.mapYofMap;
 
@@ -93,9 +93,8 @@ public class Map {
 		createMonFromFile();
 		System.out.println("MapPanel.create :: created all map items");
 
-		
 		currentField = Fields[x][y];
-		//repaint();
+		// repaint();
 	}
 
 	public void initMaxFields() {
@@ -108,18 +107,16 @@ public class Map {
 		// System.out.println (maxFieldsX + " " + maxFieldsY);
 	}
 
-	private void createBaseFromFile () {
-		String[] data = new String[mapSize*mapSize+1];
+	private void createBaseFromFile() {
+		String[] data = new String[mapSize * mapSize + 1];
 		int lines = 0;
 
 		try {
-			File file = new File(new URL(MainApplet.applet.getCodeBase(),"data/BaseData"
-					+ mapLV).toURI());
-			
+			File file = new File(new URL(MainApplet.applet.getCodeBase(), "data/BaseData" + mapLV).toURI());
+
 			FileInputStream fileStream = new FileInputStream(file);
 			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
+			BufferedReader fromFile = new BufferedReader(new InputStreamReader(dataStream));
 
 			String strLine;
 			// Read File Line By Line
@@ -135,29 +132,27 @@ public class Map {
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
-		
-		String dat = (String) data[0].subSequence(1, data[0].length()-1);
-		//System.out.println(dat);
-		for (short i=0;i<mapSize;i++) {
-			for (short j=0;j<mapSize;j++) {	
-				
-				
-				if (dat.equals("Grass")) 
-					Bases[i][j] = new Grass(i,j);
+
+		String dat = (String) data[0].subSequence(1, data[0].length() - 1);
+		// System.out.println(dat);
+		for (short i = 0; i < mapSize; i++) {
+			for (short j = 0; j < mapSize; j++) {
+
+				if (dat.equals("Grass"))
+					Bases[i][j] = new Grass(i, j);
 				if (dat.equals("Road"))
-					Bases[i][j] = new Road(i,j);
+					Bases[i][j] = new Road(i, j);
 				if (dat.equals("Underground"))
-					Bases[i][j] = new Underground(i,j);
+					Bases[i][j] = new Underground(i, j);
 				if (dat.equals("Nothing"))
-					Bases[i][j] = new Nothing(i,j);
+					Bases[i][j] = new Nothing(i, j);
 			}
 		}
-		
 
 		String[] temp;
 		for (short i = 1; i < lines; i++) {
 			temp = data[i].split("~");
-			
+
 			int x = Integer.parseInt(temp[1]);
 			int y = Integer.parseInt(temp[2]);
 
@@ -166,25 +161,24 @@ public class Map {
 			if (temp[0].equals("Road"))
 				Fields[x][y] = new Road(x, y);
 			if (temp[0].equals("Underground"))
-				Bases[x][y] = new Underground(x,y);
+				Bases[x][y] = new Underground(x, y);
 			if (temp[0].equals("Nothing"))
-				Bases[x][y] = new Nothing(x,y);
+				Bases[x][y] = new Nothing(x, y);
 
 			// new Base
 		}
 	}
+
 	private void createMapFromFile() {
-		String[] data = new String[mapSize*mapSize];
+		String[] data = new String[mapSize * mapSize];
 		int lines = 0;
 
 		try {
-			File file = new File(new URL(MainApplet.applet.getCodeBase(),"data/MapData"
-					+ mapLV).toURI());
-			
+			File file = new File(new URL(MainApplet.applet.getCodeBase(), "data/MapData" + mapLV).toURI());
+
 			FileInputStream fileStream = new FileInputStream(file);
 			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
+			BufferedReader fromFile = new BufferedReader(new InputStreamReader(dataStream));
 
 			String strLine;
 			// Read File Line By Line
@@ -205,14 +199,15 @@ public class Map {
 		String[] temp;
 		for (short i = 0; i < lines; i++) {
 			temp = data[i].split("~");
-			
-			//System.out.println("MapPanel.createFieldFromFile :: short i = "+i);
+
+			// System.out.println("MapPanel.createFieldFromFile :: short i =
+			// "+i);
 			int x = Integer.parseInt(temp[1]);
 			int y = Integer.parseInt(temp[2]);
 
 			// System.out.println(data[i]);
-			
-			//map base
+
+			// map base
 			if (temp[0].equals("Lava"))
 				Fields[x][y] = new Lava(x, y);
 			if (temp[0].equals("Water"))
@@ -227,8 +222,8 @@ public class Map {
 				Fields[x][y] = new Rock(x, y);
 			if (temp[0].equals("Wood"))
 				Fields[x][y] = new Wood(x, y);
-			
-			//map object
+
+			// map object
 			if (temp[0].equals("LadderUp"))
 				Fields[x][y] = new LadderUp(x, y);
 			if (temp[0].equals("LadderDown"))
@@ -237,8 +232,8 @@ public class Map {
 				Fields[x][y] = new Tree(x, y);
 			if (temp[0].equals("TropicalTree"))
 				Fields[x][y] = new TropicalTree(x, y);
-			
-			//special
+
+			// special
 			if (temp[0].equals("Plain"))
 				Fields[x][y] = new PlainField(x, y);
 			if (temp[0].equals("SpawnField"))
@@ -282,17 +277,16 @@ public class Map {
 			// new Field
 		}
 	}
+
 	private void createMonFromFile() {
-		String[] data = new String[mapSize*mapSize];
+		String[] data = new String[mapSize * mapSize];
 		int lines = 0;
 
 		try {
-			File file = new File(new URL(MainApplet.applet.getCodeBase(),"data/MonData"
-					+ mapLV).toURI());
+			File file = new File(new URL(MainApplet.applet.getCodeBase(), "data/MonData" + mapLV).toURI());
 			FileInputStream fileStream = new FileInputStream(file);
 			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
+			BufferedReader fromFile = new BufferedReader(new InputStreamReader(dataStream));
 
 			String strLine;
 			// Read File Line By Line
@@ -301,7 +295,7 @@ public class Map {
 				if (!strLine.equals("")) {
 					data[lines] = strLine;
 					lines++;
-					// System.out.println("|"+ data[lines-1] +"|");
+					System.out.println("Map.createMonFromFile |" + data[lines - 1] + "|");
 				}
 			}
 
@@ -318,15 +312,15 @@ public class Map {
 			int y = Integer.parseInt(temp[2]);
 			int delay = Integer.parseInt(temp[3]);
 
-			npcs[i] = NPC.createNpcByName(name, x, delay, i);
+			npcs[i] = NPC.createNpcByName(name, x, y, i);
 
 			Fields[x][y].take(i);
-			
+
 			try {
-			//npcs[i].setActive(delay);
-			} catch (NullPointerException e){
-				System.out.println("Map.crMon :: npcs["+i+"] = "+npcs[i]);
-				System.out.println("Map.crMon :: delay = "+delay);
+				// npcs[i].setActive(delay);
+			} catch (NullPointerException e) {
+				System.out.println("Map.crMon :: npcs[" + i + "] = " + npcs[i]);
+				System.out.println("Map.crMon :: delay = " + delay);
 			}
 			incrNPCNum();
 		}
@@ -334,19 +328,22 @@ public class Map {
 
 	/* - Paint the map - */
 	public void drawMap(int spaceLeft, int spaceTop, Graphics g) {
-		//System.out.println("Map.drawMap :: space = ("+spaceLeft+"|"+spaceTop+")");
-		//spaceLeft+=MainApplet.actPlayer.getStepX();
-		//spaceTop+=MainApplet.actPlayer.getStepY();
-		
+		// System.out.println("Map.drawMap :: space =
+		// ("+spaceLeft+"|"+spaceTop+")");
+		// spaceLeft+=MainApplet.actPlayer.getStepX();
+		// spaceTop+=MainApplet.actPlayer.getStepY();
+
 		initMaxFields();
 
 		for (short i = 0; i < maxFieldsX + 2; i++) {
 			for (short j = 0; j < maxFieldsY + 2; j++) {
-				g.drawImage(Bases[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop, MainApplet.applet);
-				g.drawImage(Fields[mapX + i][mapY + j].getImage(), 30* (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop, MainApplet.applet);
+				g.drawImage(Bases[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
+						MainApplet.applet);
+				g.drawImage(Fields[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
+						MainApplet.applet);
 			}
 		}
-		
+
 		// <-- For Debugging
 		// g.drawLine(60, 60+10, 60, 150+10);
 		// g.drawLine(60, 150+10, 150, 150+10);
@@ -363,17 +360,17 @@ public class Map {
 			int x = npcs[i].getPosX();
 			int y = npcs[i].getPosY();
 
-			g.drawImage(pic, 30 * (x - 1) + spaceLeft, 30 * (y - 1) + spaceTop,MainApplet.applet);
+			g.drawImage(pic, 30 * (x - 1) + spaceLeft, 30 * (y - 1) + spaceTop, MainApplet.applet);
 		}
 		ExternalPlayer.paintAll(g);
 	}
-	public void repaint () {
-		//System.out.println("Map.repaint :: <repainting>");
+
+	public void repaint() {
+		// System.out.println("Map.repaint :: <repainting>");
 		MainApplet.getGamePanel().repaint();
 	}
-	
-	
-	public NPC getNpcById (int i) {
+
+	public NPC getNpcById(int i) {
 		return npcs[i];
 	}
 
@@ -393,28 +390,26 @@ public class Map {
 		currentField = Fields[x][y];
 		currentField.entered();
 
-		//MainProg.GameWin.setTitle("Current Position : " + x + " | " + y);
+		// MainProg.GameWin.setTitle("Current Position : " + x + " | " + y);
 	}
 
-	public void changeMapCoords (int newX, int newY) {		
+	public void changeMapCoords(int newX, int newY) {
 		int difX = mapX - newX;
 		int difY = mapY - newY;
-		
+
 		mapX = newX;
 		mapY = newY;
-		
-		for (int i=0;i<npcNum;i++) {
+
+		for (int i = 0; i < npcNum; i++) {
 			npcs[i].posX += difX;
 			npcs[i].posY += difY;
 		}
-		//repaint();
 	}
-
-
 
 	public int getMapX() {
 		return mapX;
 	}
+
 	public int getMapY() {
 		return mapY;
 	}
@@ -422,9 +417,11 @@ public class Map {
 	public void incrMapLV() {
 		mapLV++;
 	}
+
 	public void decrMapLV() {
 		mapLV--;
 	}
+
 	public int getMapLV() {
 		return (int) mapLV;
 	}
@@ -461,8 +458,8 @@ public class Map {
 		default:
 			return 0;
 		}
-		
-		System.out.println("Map.checkMove : (tempX|tempY) => ("+tempMapX+"|"+tempMapY+")");
+
+		System.out.println("Map.checkMove : (tempX|tempY) => (" + tempMapX + "|" + tempMapY + ")");
 
 		if (tempMapX <= 0) {
 			return -1;
@@ -475,15 +472,17 @@ public class Map {
 		}
 		if (tempMapY >= 500) {
 			return -1;
-		}	
-		
+		}
+
 		if (!MainApplet.map.Fields[x][y].checkAccessible(dir)) {
-			//System.out.println("Map.checkMove :: start field is not leavable");
+			// System.out.println("Map.checkMove :: start field is not
+			// leavable");
 			return 0;
 		}
 
 		if (!MainApplet.map.Fields[tempMapX][tempMapY].checkAccessible(tempDir)) {
-			//System.out.println("Map.checkMove :: goal field is not accessable");
+			// System.out.println("Map.checkMove :: goal field is not
+			// accessable");
 			return 0;
 		}
 		return 1;
@@ -505,34 +504,65 @@ public class Map {
 			return null;
 		}
 	}
-	
-	public void changeLV (byte k) {
+
+	public void changeLV(byte k) {
 		this.mapLV += k;
 		recreateMap();
-		System.out.println("Map LV changed to : "+mapLV);
+		System.out.println("Map LV changed to : " + mapLV);
 	}
+
 	public void setLV(byte k) {
 		this.mapLV = k;
 		recreateMap();
-		System.out.println("Map LV changed to : "+mapLV);	
+		System.out.println("Map LV changed to : " + mapLV);
 	}
-	
-	public void recreateMap () {
+
+	public void recreateMap() {
 		// clear arrays :
 		for (short i = 0; i < mapSize; i++) {
 			for (short j = 0; j < mapSize; j++) {
 				Fields[i][j] = new PlainField(i, j);
 			}
 		}
-		for (int i=0;i<100;i++) {
+		for (int i = 0; i < 100; i++) {
 			npcs[i] = null;
 		}
 		npcNum = 0;
-		
+
 		// store data of the new map lv :
 		createBaseFromFile();
 		createMapFromFile();
 		createMonFromFile();
-		//repaint();
+		// repaint();
 	}
+
+	public static int getMapShiftX() {
+		int mapX = MainApplet.actPlayer.getMapX();
+		int posX = MainApplet.actPlayer.getPosX();
+
+		if (mapX < 8)
+			return 0;
+		else
+			return mapX - posX;
+	}
+
+	public static int getMapShiftY() {
+		int mapY = MainApplet.actPlayer.getMapY();
+		int posY = MainApplet.actPlayer.getPosY();
+
+		if (mapY < 8)
+			return 0;
+		else
+			return mapY - posY;
+	}
+
+	// Input: MapX, Output: PosX
+	public static int transformToPosX(int mapX) {
+		return mapX - getMapShiftX();
+	}
+	// Input: MapY, Output: PosY
+	public static int transformToPosY(int mapY) {
+		return mapY - getMapShiftY();
+	}
+
 }

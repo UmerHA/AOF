@@ -13,7 +13,7 @@ public class Demon extends Monster {
 		this.name = "Demon";
 		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage("pics/monster/small/demon_100.png");
 		this.walkingRadius = 3;
-		this.sleepingTime = 1250; 
+		this.sleepingTime = 1200; 
 		this.regenHP = 10;
 		this.regenTime = 15000;
 		this.spawnTime = 30000;

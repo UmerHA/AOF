@@ -120,6 +120,12 @@ public class Player {
 	int getMapY () {
 		return mapY;
 	}
+	public int getPosX () {
+		return posX;
+	}public
+	int getPosY () {
+		return posY;
+	}
 	public byte getStepX () {
 		return this.stepX;
 	}

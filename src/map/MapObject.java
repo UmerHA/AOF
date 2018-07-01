@@ -25,11 +25,6 @@ public class MapObject extends MapField {
 	public void examine  () {
 		MainApplet.addInfo(examineTXT);
 	}
-
-	public String getName () {
-		String temp = this.getClass().toString();
-		return temp.substring(17, temp.length());
-	}
 	
 	//override
 	public void use () {}

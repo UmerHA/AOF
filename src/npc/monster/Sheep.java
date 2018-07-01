@@ -13,7 +13,7 @@ public class Sheep extends Monster {
 		this.name = "Sheep";
 		this.Img100 = java.awt.Toolkit.getDefaultToolkit().getImage("pics/monster/small/sheep_100.png");
 		this.walkingRadius = 2;
-		this.sleepingTime = 1250; 
+		this.sleepingTime = 1200; 
 		this.regenHP = 1;
 		this.regenTime = 15000;
 		this.spawnTime = 60000;

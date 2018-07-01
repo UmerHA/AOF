@@ -155,7 +155,6 @@ public class ClientThread extends Thread {
 		
 		/* NPC MOVE HANDLING */
 		if (data[0].equals("nupd")) {
-			System.out.println("NUPD received");
 			int id = Integer.parseInt(data[1]);
 			int x = Integer.parseInt(data[2]);
 			int y = Integer.parseInt(data[3]);

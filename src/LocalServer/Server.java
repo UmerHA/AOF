@@ -24,6 +24,7 @@ public class Server {
 
 	static ConnectionSource dbConnectionSource;
 	static Dao<Player, String> playerDao;
+	static Dao<NPC, String> npcDao;
 	static List<Player> players = new ArrayList<Player>();
 
 	static JFrame frame = new JFrame("Server");
@@ -34,6 +35,7 @@ public class Server {
 	public static void main(String[] args) {
 		connectToDB();
 		startServer();
+		new NPCMover().start();
 
 		try {
 			ClientConnector.connect();
@@ -49,7 +51,6 @@ public class Server {
 			dbConnectionSource = new JdbcConnectionSource(url);
 
 			playerDao = DaoManager.createDao(dbConnectionSource, Player.class);
-
 			TableUtils.createTableIfNotExists(dbConnectionSource, Player.class);
 
 			System.out.println("Connection to SQLite has been established.");
@@ -79,13 +80,14 @@ public class Server {
 		frame.setVisible(true);
 
 	}
+
 	static void displayMessage(String message) {
-    	messageArea.append(message);
-    	
-    	JScrollBar vertical = scrollableMessageArea.getVerticalScrollBar();
-    	vertical.setValue( vertical.getMaximum() );
+		messageArea.append(message);
+
+		JScrollBar vertical = scrollableMessageArea.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
 	}
-	
+
 	public static List<Response> handle(String message, int clientNumber) throws NullPointerException {
 		message = message.toLowerCase();
 		String[] tokens = message.replace("#", "").split("~");
@@ -111,6 +113,10 @@ public class Server {
 
 	static Stream<Integer> otherPlayerIds(int playerId) {
 		return ClientConnector.getPlayingClients().stream().filter((otherPlayerId) -> otherPlayerId != playerId);
+	}
+
+	static Stream<Integer> allPlayerIds() {
+		return ClientConnector.getPlayingClients().stream();
 	}
 
 	static List<Response> login_response(String[] tokens, int clientNumber) {

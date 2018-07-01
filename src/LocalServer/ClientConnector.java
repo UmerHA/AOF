@@ -38,19 +38,22 @@ class ClientConnector {
     	
     }
     
+
     static void sendMessage(String message, int clientNumber) {
     	connections.get(clientNumber).to_client.println(message);
     	Server.displayMessage("To client " + clientNumber +  ": " + message + "\n");
     }
-	static void receiveMessage(String message, int clientNumber) {
-		Server.displayMessage("From client " + clientNumber + ": " + message + "\n");
-		List<Response> responses = Server.handle(message, clientNumber);
-		
+    static void sendResponses(List<Response> responses) {
 		if (responses == null)
 			return;
 		
 		for (Response response : responses)
-			sendMessage(response.message, response.clientNumber);			
+			sendMessage(response.message, response.clientNumber);	
+    }
+	static void receiveMessage(String message, int clientNumber) {
+		Server.displayMessage("From client " + clientNumber + ": " + message + "\n");
+		List<Response> responses = Server.handle(message, clientNumber);
+		sendResponses(responses);
 	}
 	
 	static List<Integer> getPlayingClients () {

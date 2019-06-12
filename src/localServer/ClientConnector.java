@@ -40,7 +40,12 @@ class ClientConnector {
     
 
     static void sendMessage(String message, int clientNumber) {
-    	connections.get(clientNumber).to_client.println(message);
+    	try {    	
+    		connections.get(clientNumber).to_client.println(message);
+    	} catch (IndexOutOfBoundsException e) {
+    		System.out.println("Tried to send a message to client with number " + clientNumber + ", but that client does not exist");
+    		System.out.println("Message: " + message);
+    	}
     	Server.displayMessage("To client " + clientNumber +  ": " + message + "\n");
     }
     static void sendResponses(List<Response> responses) {

@@ -5,8 +5,8 @@ import client.map.MapObject;
 
 public class TropicalTree extends MapObject {
 
-	public TropicalTree(int x, int y) {
-		super(x, y, "fields/TropicalTree.gif");
+	public TropicalTree() {
+		super("fields/TropicalTree.gif");
 		this.option1 = "Pick fruit";
 		this.examineTXT = "A tropical tree.";
 	}

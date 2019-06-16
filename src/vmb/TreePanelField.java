@@ -171,68 +171,66 @@ public class TreePanelField extends PlainTreePanel {
 		
 		return id;
 	}
+
 	public MapField getMapFieldByName (String name) {
 		MapField mp = null;
-		// x und y sind unwichtig
-		int x = 0;
-		int y = 0;
 		
 		if (name.equalsIgnoreCase("Plain"))
-			mp = new PlainField(x,y);
+			mp = new PlainField();
 		
 		if (name.equalsIgnoreCase("Rock"))
-			mp = new Rock(x,y);
+			mp = new Rock();
 		if (name.equalsIgnoreCase("Tree"))
-			mp = new Tree(x,y);
+			mp = new Tree();
 		if (name.equalsIgnoreCase("Tropical Tree"))
-			mp = new TropicalTree(x,y);
+			mp = new TropicalTree();
 		if (name.equalsIgnoreCase("Ladder Up"))
-			mp = new LadderUp(x,y);
+			mp = new LadderUp();
 		if (name.equalsIgnoreCase("Ladder Down"))
-			mp = new LadderDown(x,y);
+			mp = new LadderDown();
 		
 		if (name.equalsIgnoreCase("North"))
-			mp = new FenceNorth(x,y);
+			mp = new FenceNorth();
 		if (name.equalsIgnoreCase("East"))
-			mp = new FenceEast(x,y);
+			mp = new FenceEast();
 		if (name.equalsIgnoreCase("South"))
-			mp = new FenceSouth(x,y);
+			mp = new FenceSouth();
 		if (name.equalsIgnoreCase("West"))
-			mp = new FenceWest(x,y);
+			mp = new FenceWest();
 
 		
 		if (name.equalsIgnoreCase("NE"))
-			mp = new FenceNE(x,y);
+			mp = new FenceNE();
 		if (name.equalsIgnoreCase("NW"))
-			mp = new FenceNW(x,y);
+			mp = new FenceNW();
 		if (name.equalsIgnoreCase("SE"))
-			mp = new FenceSE(x,y);
+			mp = new FenceSE();
 		if (name.equalsIgnoreCase("SW"))
-			mp = new FenceSW(x,y);
+			mp = new FenceSW();
 		
 		if (name.equalsIgnoreCase("NSE"))
-			mp = new FenceNSE(x,y);
+			mp = new FenceNSE();
 		if (name.equalsIgnoreCase("NSW"))
-			mp = new FenceNSW(x,y);
+			mp = new FenceNSW();
 		if (name.equalsIgnoreCase("NWE"))
-			mp = new FenceNWE(x,y);
+			mp = new FenceNWE();
 		if (name.equalsIgnoreCase("SWE"))
-			mp = new FenceSWE(x,y);
+			mp = new FenceSWE();
 		
 		if (name.equalsIgnoreCase("Lava"))
-			mp = new Lava(x,y);
+			mp = new Lava();
 		if (name.equalsIgnoreCase("Lava Hole"))
-			mp = new LavaHole(x,y);
+			mp = new LavaHole();
 		if (name.equalsIgnoreCase("Water (Type 1)"))
-			mp = new Water(x,y);
+			mp = new Water();
 		if (name.equalsIgnoreCase("Water (Type 2)"))
-			mp = new Water1(x,y);
+			mp = new Water1();
 		if (name.equalsIgnoreCase("Water (Type 3)"))
-			mp = new Water2(x,y);
+			mp = new Water2();
 		if (name.equalsIgnoreCase("Sand"))
-			mp = new Sand(x,y);
+			mp = new Sand();
 		if (name.equalsIgnoreCase("Wood"))
-			mp = new Wood(x,y);
+			mp = new Wood();
 		
 		return mp;
 	}

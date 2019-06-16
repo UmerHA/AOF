@@ -3,13 +3,10 @@ package vmb;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 
 import javax.swing.JPanel;
 
+import client.Util;
 import client.map.MapBase;
 import client.map.MapField;
 import client.map.mapBases.*;
@@ -46,7 +43,7 @@ public class MapPanel extends JPanel {
 
 		for (short i = 0; i < mapSize; i++) {
 			for (short j = 0; j < mapSize; j++) {
-				Fields[i][j] = new PlainField(i, j);
+				Fields[i][j] = new PlainField();
 				delays[i][j] = 0;
 			}
 		}
@@ -70,16 +67,10 @@ public class MapPanel extends JPanel {
 		short lines = 0;
 
 		try {
-			File file = new File(VisualMapBuilder.PATH + "BaseData"+ mapLV);
-			
-			FileInputStream fileStream = new FileInputStream(file);
-			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
+			BufferedReader fromFile = Util.loadDataFileAsBufferedReader("BaseData"+ mapLV);
 
-			String strLine;
 			// Read File Line By Line
-
+			String strLine;
 			while ((strLine = fromFile.readLine()) != null) {
 				if (!strLine.equals("")) {
 					data[lines] = strLine;
@@ -98,13 +89,13 @@ public class MapPanel extends JPanel {
 		for (short i=0;i<mapSize;i++) {
 			for (short j=0;j<mapSize;j++) {	
 				if (levelBase.equals("Grass")) 
-					Bases[i][j] = new Grass(i,j);
+					Bases[i][j] = new Grass();
 				if (levelBase.equals("Road"))
-					Bases[i][j] = new Road(i,j);
+					Bases[i][j] = new Road();
 				if (levelBase.equals("Underground"))
-					Bases[i][j] = new Underground(i,j);
+					Bases[i][j] = new Underground();
 				if (levelBase.equals("Nothing"))
-					Bases[i][j] = new Nothing(i,j);
+					Bases[i][j] = new Nothing();
 			}
 		}
 		
@@ -123,13 +114,13 @@ public class MapPanel extends JPanel {
 			*/
 			
 			if (temp[0].equals("Grass"))
-				Bases[x][y] = new Grass(x, y);
+				Bases[x][y] = new Grass();
 			if (temp[0].equals("Road"))
-				Bases[x][y] = new Road(x, y);
+				Bases[x][y] = new Road();
 			if (temp[0].equals("Underground"))
-				Bases[x][y] = new Underground(x, y);
+				Bases[x][y] = new Underground();
 			if (temp[0].equals("Nothing"))
-				Bases[x][y] = new Nothing(x,y);
+				Bases[x][y] = new Nothing();
 
 			// new Base
 		}
@@ -139,13 +130,7 @@ public class MapPanel extends JPanel {
 		short lines = 0;
 
 		try {
-			File file = new File(VisualMapBuilder.PATH + "MapData"+ mapLV);
-			
-			FileInputStream fileStream = new FileInputStream(file);
-			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
-
+			BufferedReader fromFile = Util.loadDataFileAsBufferedReader("MapData"+ mapLV);
 			String strLine;
 			// Read File Line By Line
 
@@ -172,70 +157,70 @@ public class MapPanel extends JPanel {
 			
 			//map base
 			if (temp[0].equals("Lava"))
-				Fields[x][y] = new Lava(x, y);
+				Fields[x][y] = new Lava();
 			if (temp[0].equals("Water"))
-				Fields[x][y] = new Water(x, y);
+				Fields[x][y] = new Water();
 			if (temp[0].equals("Water1"))
-				Fields[x][y] = new Water1(x, y);
+				Fields[x][y] = new Water1();
 			if (temp[0].equals("Water2"))
-				Fields[x][y] = new Water2(x, y);
+				Fields[x][y] = new Water2();
 			if (temp[0].equals("Sand"))
-				Fields[x][y] = new Sand(x, y);
+				Fields[x][y] = new Sand();
 			if (temp[0].equals("Rock"))
-				Fields[x][y] = new Rock(x, y);
+				Fields[x][y] = new Rock();
 			if (temp[0].equals("Wood"))
-				Fields[x][y] = new Wood(x, y);
+				Fields[x][y] = new Wood();
 			
 			//map object
 			if (temp[0].equals("LadderUp"))
-				Fields[x][y] = new LadderUp(x, y);
+				Fields[x][y] = new LadderUp();
 			if (temp[0].equals("LadderDown"))
-				Fields[x][y] = new LadderDown(x, y);
+				Fields[x][y] = new LadderDown();
 			if (temp[0].equals("Tree"))
-				Fields[x][y] = new Tree(x, y);
+				Fields[x][y] = new Tree();
 			if (temp[0].equals("TropicalTree"))
-				Fields[x][y] = new TropicalTree(x, y);
+				Fields[x][y] = new TropicalTree();
 			
 			//special
 			if (temp[0].equals("Plain"))
-				Fields[x][y] = new PlainField(x, y);
+				Fields[x][y] = new PlainField();
 			if (temp[0].equals("SpawnField"))
-				Fields[x][y] = new TropicalTree(x, y);
+				Fields[x][y] = new TropicalTree();
 			if (temp[0].equals("LavaHole"))
-				Fields[x][y] = new LavaHole(x, y);
+				Fields[x][y] = new LavaHole();
 
 			// Fences :
 			// 1-Line
 			if (temp[0].equals("FenceNorth"))
-				Fields[x][y] = new FenceNorth(x, y);
+				Fields[x][y] = new FenceNorth();
 			if (temp[0].equals("FenceSouth"))
-				Fields[x][y] = new FenceSouth(x, y);
+				Fields[x][y] = new FenceSouth();
 			if (temp[0].equals("FenceEast"))
-				Fields[x][y] = new FenceEast(x, y);
+				Fields[x][y] = new FenceEast();
 			if (temp[0].equals("FenceWest"))
-				Fields[x][y] = new FenceWest(x, y);
+				Fields[x][y] = new FenceWest();
 			// 2-Line
 			if (temp[0].equals("FenceNE"))
-				Fields[x][y] = new FenceNE(x, y);
+				Fields[x][y] = new FenceNE();
 			if (temp[0].equals("FenceNW"))
-				Fields[x][y] = new FenceNW(x, y);
+				Fields[x][y] = new FenceNW();
 			if (temp[0].equals("FenceNS"))
-				Fields[x][y] = new FenceNS(x, y);
+				Fields[x][y] = new FenceNS();
 			if (temp[0].equals("FenceSE"))
-				Fields[x][y] = new FenceSE(x, y);
+				Fields[x][y] = new FenceSE();
 			if (temp[0].equals("FenceSW"))
-				Fields[x][y] = new FenceSW(x, y);
+				Fields[x][y] = new FenceSW();
 			if (temp[0].equals("FenceWE"))
-				Fields[x][y] = new FenceWE(x, y);
+				Fields[x][y] = new FenceWE();
 			// 3-line
 			if (temp[0].equals("FenceNSE"))
-				Fields[x][y] = new FenceNSE(x, y);
+				Fields[x][y] = new FenceNSE();
 			if (temp[0].equals("FenceNSW"))
-				Fields[x][y] = new FenceNSW(x, y);
+				Fields[x][y] = new FenceNSW();
 			if (temp[0].equals("FenceNWE"))
-				Fields[x][y] = new FenceNWE(x, y);
+				Fields[x][y] = new FenceNWE();
 			if (temp[0].equals("FenceSWE"))
-				Fields[x][y] = new FenceSWE(x, y);
+				Fields[x][y] = new FenceSWE();
 
 
 			// new Field
@@ -246,11 +231,7 @@ public class MapPanel extends JPanel {
 		short lines = 0;
 
 		try {
-			File file = new File(VisualMapBuilder.PATH + "MonData"+ mapLV);
-			FileInputStream fileStream = new FileInputStream(file);
-			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
+			BufferedReader fromFile = Util.loadDataFileAsBufferedReader("MonData"+ mapLV);
 
 			String strLine;
 			// Read File Line By Line
@@ -445,7 +426,7 @@ public class MapPanel extends JPanel {
 		// clear arrays :
 		for (short i = 0; i < mapSize; i++) {
 			for (short j = 0; j < mapSize; j++) {
-				Fields[i][j] = new PlainField(i, j);
+				Fields[i][j] = new PlainField();
 				NPCs[i][j] = null;
 			}
 		}

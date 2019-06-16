@@ -3,11 +3,28 @@ package client.npc;
 import java.awt.Image;
 
 import client.App;
+import client.IntPair;
 import client.Map;
 import client.Util;
 import client.myObject;
-import client.npc.monster.*;
-import client.npc.tnpc.*;
+import client.npc.monster.Ankou;
+import client.npc.monster.BigGoblin;
+import client.npc.monster.Big_kA;
+import client.npc.monster.Chicken;
+import client.npc.monster.Demon;
+import client.npc.monster.Dog;
+import client.npc.monster.Dragon;
+import client.npc.monster.Dude;
+import client.npc.monster.Goblin;
+import client.npc.monster.Jad;
+import client.npc.monster.MithrilDragon;
+import client.npc.monster.Phoenix;
+import client.npc.monster.Sheep;
+import client.npc.monster.kA;
+import client.npc.tnpc.Adventurer;
+import client.npc.tnpc.Edward;
+import client.npc.tnpc.Farmer;
+import client.npc.tnpc.Joe;
 
 public class NPC extends myObject {
 	protected Image largeImage;
@@ -73,14 +90,14 @@ public class NPC extends myObject {
 	/* - */
 	
 	public void moveByServer (int x, int y) {
-		App.map.fields[mapX][mapY].free();
+		App.map.fields.get(new IntPair(mapX, mapY)).free();
 		
 		mapX = x;
 		mapY = y;
 		
 		recalcPosXY();
 
-		App.map.fields[mapX][mapY].take(id);
+		App.map.fields.get(new IntPair(mapX, mapY)).take(id);
 	}
 
 

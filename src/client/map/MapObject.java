@@ -6,8 +6,8 @@ public class MapObject extends MapField {
 	protected String option1 = "";
 	protected String examineTXT = "";
 	
-	public MapObject(int x, int y, String picPath) {
-		super(x, y, picPath);
+	public MapObject(String picPath) {
+		super(picPath);
 		this.isObject = true;
 		accessibleNorth = false;
 		accessibleSouth = false;

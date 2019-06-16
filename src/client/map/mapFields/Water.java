@@ -5,8 +5,8 @@ import client.map.MapField;
 
 
 public class Water extends MapField {
-	public Water (int x, int y) {		
-		super(x,y, "fields/Water.jpg");
+	public Water () {		
+		super("fields/Water.jpg");
 		this.setOpenForNPC(false);
 	}
 	

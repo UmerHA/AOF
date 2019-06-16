@@ -3,8 +3,9 @@ package client;
 import java.util.HashMap;
 
 public class DefaultHashMap<KeyType,ValueType> extends HashMap<KeyType,ValueType> {
-
-    ValueType defaultObject;
+	private static final long serialVersionUID = 1L;
+	
+	ValueType defaultObject;
     public DefaultHashMap(ValueType defaultObject) {
         this.defaultObject = defaultObject;    
     }
@@ -22,4 +23,5 @@ public class DefaultHashMap<KeyType,ValueType> extends HashMap<KeyType,ValueType
         	return returnValue;
         }
     }   
+
 }

@@ -7,7 +7,7 @@ import client.map.MapBase;
  */
 
 public class Road extends MapBase {
-	public Road (int x, int y) {
-		super (x,y,"fields/Road.jpg");
+	public Road () {
+		super ("fields/Road.jpg");
 	}
 }

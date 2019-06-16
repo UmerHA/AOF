@@ -4,8 +4,8 @@ import client.App;
 import client.map.MapObject;
 
 public class LadderUp extends MapObject {
-	public LadderUp (int x, int y) {		
-		super(x,y, "fields/LadderUp.gif");
+	public LadderUp () {		
+		super("fields/LadderUp.gif");
 		this.option1 = "Climp up";
 		this.examineTXT = "Used to reach higher levels";
 	}

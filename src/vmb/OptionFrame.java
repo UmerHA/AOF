@@ -9,18 +9,17 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import client.Util;
 
 public class OptionFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +30,7 @@ public class OptionFrame extends JFrame {
 	private southPanel southP;
 	private buttonPanel buttonP;
 	
-	private final String path = VisualMapBuilder.PATH + "vmbData";
+	private final String dataFilePath = Util.DATA_DIR + "vmbData";
 	
 	//default values:
 	private boolean baseShowField = false;
@@ -81,16 +80,12 @@ public class OptionFrame extends JFrame {
 		short lines = 0;
 
 		try {
-			File file = new File(path);
+			File file = new File(dataFilePath);
 			
 			if (!file.exists())
 				createDataFile();
 			
-			
-			FileInputStream fileStream = new FileInputStream(file);
-			DataInputStream dataStream = new DataInputStream(fileStream);
-			BufferedReader fromFile = new BufferedReader(new InputStreamReader(
-					dataStream));
+			BufferedReader fromFile = Util.loadDataFileAsBufferedReader(dataFilePath);
 
 			String strLine;
 			// Read File Line By Line
@@ -145,7 +140,7 @@ public class OptionFrame extends JFrame {
 	public void saveData() {
 		try {
 			// delete and re-create file :
-			File aFile = new File(path);
+			File aFile = new File(dataFilePath);
 			aFile.delete();
 			aFile.createNewFile();
 
@@ -154,7 +149,7 @@ public class OptionFrame extends JFrame {
 			try {
 
 				BufferedWriter toFile = new BufferedWriter(new FileWriter(
-						path));
+						dataFilePath));
 				int mapX = VisualMapBuilder.topMapPanel().getMapX();
 				int mapY = VisualMapBuilder.topMapPanel().getMapY();
 				int mapLV = VisualMapBuilder.topMapPanel().getMapLV();
@@ -518,10 +513,10 @@ public class OptionFrame extends JFrame {
 
 	private void createDataFile () {
 		try {
-			File file = new File(path);
+			File file = new File(dataFilePath);
 			file.createNewFile();
 			BufferedWriter toFile = new BufferedWriter(new FileWriter(
-					path));
+					dataFilePath));
 
 			toFile.write("0");toFile.newLine();
 			toFile.write("0");toFile.newLine();

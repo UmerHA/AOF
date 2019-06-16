@@ -8,8 +8,8 @@ public class Grass extends MapBase {
 	
 	private static Image pic;
 
-	public Grass (int x, int y) {
-		super (x,y,"fields/grass.jpg");
+	public Grass () {
+		super ("fields/grass.jpg");
 		isNotBasic = false;
 		pic = this.getImage();
 	}

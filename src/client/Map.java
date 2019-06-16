@@ -24,8 +24,8 @@ public class Map {
 
 	public static final int mapSize = 150;
 
-	private MapBase[] bases[] = new MapBase[mapSize][mapSize];
-	public MapField[] fields[] = new MapField[mapSize][mapSize];
+	private DefaultHashMap<IntPair, MapBase> bases;
+	public DefaultHashMap<IntPair, MapField> fields;
 
 	private int mapX = 0;
 	private int mapY = 0;
@@ -48,15 +48,6 @@ public class Map {
 		mapX = (short) App.actPlayer.mapXofMap;
 		mapY = (short) App.actPlayer.mapYofMap;
 
-		Util.timedLog("MapPanel.create :: creating plain fields");
-		LOGGER.info("MapPanel.create :: creating plain fields");		
-		
-		for (short i = 0; i < mapSize; i++) {
-			for (short j = 0; j < mapSize; j++) {
-				fields[i][j] = new PlainField(i, j);
-			}
-		}
-
 		Util.timedLog("MapPanel.create :: creating Base");
 		LOGGER.info("MapPanel.create :: creating Base");
 		createBaseFromFile();
@@ -71,7 +62,7 @@ public class Map {
 		
 		System.out.println("MapPanel.create :: created all map items");
 		LOGGER.info("MapPanel.create :: created all map items");
-		currentField = fields[x][y];
+		currentField = fields.get(new IntPair(x,y)) ;
 		// repaint();
 	}
 
@@ -109,21 +100,21 @@ public class Map {
 			LOGGER.severe("Error: " + e.getMessage());
 		}
 
-		String dat = (String) data[0].subSequence(1, data[0].length() - 1);
-		// System.out.println(dat);
-		for (short i = 0; i < mapSize; i++) {
-			for (short j = 0; j < mapSize; j++) {
-
-				if (dat.equals("Grass"))
-					bases[i][j] = new Grass(i, j);
-				if (dat.equals("Road"))
-					bases[i][j] = new Road(i, j);
-				if (dat.equals("Underground"))
-					bases[i][j] = new Underground(i, j);
-				if (dat.equals("Nothing"))
-					bases[i][j] = new Nothing(i, j);
-			}
+		String mapBase = (String) data[0].subSequence(1, data[0].length() - 1);
+		
+		switch (mapBase) {
+		case "Grass":
+			bases = new DefaultHashMap<IntPair, MapBase>(new Grass());break;
+		case "Road":
+			bases = new DefaultHashMap<IntPair, MapBase>(new Road());break;
+		case "Underground":
+			bases = new DefaultHashMap<IntPair, MapBase>(new Underground());break;
+		case "Nothing":
+			bases = new DefaultHashMap<IntPair, MapBase>(new Nothing());break;
+		default:
+			bases = new DefaultHashMap<IntPair, MapBase>(new Nothing());break;		
 		}
+		
 
 		String[] temp;
 		for (short i = 1; i < lines; i++) {
@@ -132,16 +123,19 @@ public class Map {
 			int x = Integer.parseInt(temp[1]);
 			int y = Integer.parseInt(temp[2]);
 
-			if (temp[0].equals("Grass"))
-				fields[x][y] = new Wood(x, y);
-			if (temp[0].equals("Road"))
-				fields[x][y] = new Road(x, y);
-			if (temp[0].equals("Underground"))
-				bases[x][y] = new Underground(x, y);
-			if (temp[0].equals("Nothing"))
-				bases[x][y] = new Nothing(x, y);
-
-			// new Base
+			switch (temp[0]) {
+			case "Grass":
+				bases.put(new IntPair(x,y), new Grass());break;
+			case "Road": 
+				bases.put(new IntPair(x,y), new Road());break;
+			case "Underground":
+				bases.put(new IntPair(x,y), new Underground());break;
+			case "Nothing":
+				bases.put(new IntPair(x,y), new Nothing());break;
+			default:
+				System.err.println("Map.createBaseFromFile: unknown base type " + temp[0]);
+				LOGGER.warning("Map.createBaseFromFile: unknown base type " + temp[0]);
+			}
 		}
 	}
 
@@ -169,86 +163,89 @@ public class Map {
 			LOGGER.severe("Error: " + e.getMessage());
 		}
 
+		fields = new DefaultHashMap<IntPair, MapField>(new PlainField());
+		
 		String[] temp;
 		for (short i = 0; i < lines; i++) {
 			temp = data[i].split("~");
 
-			// System.out.println("MapPanel.createFieldFromFile :: short i =
-			// "+i);
 			int x = Integer.parseInt(temp[1]);
 			int y = Integer.parseInt(temp[2]);
 
-			// System.out.println(data[i]);
-
+			switch (temp[0]) {
 			// map base
-			if (temp[0].equals("Lava"))
-				fields[x][y] = new Lava(x, y);
-			if (temp[0].equals("Water"))
-				fields[x][y] = new Water(x, y);
-			if (temp[0].equals("Water1"))
-				fields[x][y] = new Water1(x, y);
-			if (temp[0].equals("Water2"))
-				fields[x][y] = new Water2(x, y);
-			if (temp[0].equals("Sand"))
-				fields[x][y] = new Sand(x, y);
-			if (temp[0].equals("Rock"))
-				fields[x][y] = new Rock(x, y);
-			if (temp[0].equals("Wood"))
-				fields[x][y] = new Wood(x, y);
+			case "Lava":
+				fields.put(new IntPair(x,y), new Lava());break;
+			case "Water":
+				fields.put(new IntPair(x,y), new Water());break;
+			case "Water1":
+				fields.put(new IntPair(x,y), new Water1());break;
+			case "Water2":
+				fields.put(new IntPair(x,y), new Water2());break;
+			case "Sand":
+				fields.put(new IntPair(x,y), new Sand());break;
+			case "Rock":
+				fields.put(new IntPair(x,y), new Rock());break;
+			case "Wood":
+				fields.put(new IntPair(x,y), new Wood());break;
 
 			// map object
-			if (temp[0].equals("LadderUp"))
-				fields[x][y] = new LadderUp(x, y);
-			if (temp[0].equals("LadderDown"))
-				fields[x][y] = new LadderDown(x, y);
-			if (temp[0].equals("Tree"))
-				fields[x][y] = new Tree(x, y);
-			if (temp[0].equals("TropicalTree"))
-				fields[x][y] = new TropicalTree(x, y);
+			case "LadderUp":
+				fields.put(new IntPair(x,y), new LadderUp());break;
+			case "LadderDown":
+				fields.put(new IntPair(x,y), new LadderDown());break;
+			case "Tree":
+				fields.put(new IntPair(x,y), new Tree());break;
+			case "TropicalTree":
+				fields.put(new IntPair(x,y), new TropicalTree());break;
 
 			// special
-			if (temp[0].equals("Plain"))
-				fields[x][y] = new PlainField(x, y);
-			if (temp[0].equals("SpawnField"))
-				fields[x][y] = new TropicalTree(x, y);
-			if (temp[0].equals("LavaHole"))
-				fields[x][y] = new LavaHole(x, y);
+			case "Plain":
+				fields.put(new IntPair(x,y), new PlainField());break;
+			case "SpawnField":
+				fields.put(new IntPair(x,y), new TropicalTree());break;
+			case "LavaHole":
+				fields.put(new IntPair(x,y), new LavaHole());break;
 
 			// Fences :
 			// 1-Line
-			if (temp[0].equals("FenceNorth"))
-				fields[x][y] = new FenceNorth(x, y);
-			if (temp[0].equals("FenceSouth"))
-				fields[x][y] = new FenceSouth(x, y);
-			if (temp[0].equals("FenceEast"))
-				fields[x][y] = new FenceEast(x, y);
-			if (temp[0].equals("FenceWest"))
-				fields[x][y] = new FenceWest(x, y);
+			case "FenceNorth":
+				fields.put(new IntPair(x,y), new FenceNorth());break;
+			case "FenceSouth":
+				fields.put(new IntPair(x,y), new FenceSouth());break;
+			case "FenceEast":
+				fields.put(new IntPair(x,y), new FenceEast());break;
+			case "FenceWest":
+				fields.put(new IntPair(x,y), new FenceWest());break;
 			// 2-Line
-			if (temp[0].equals("FenceNE"))
-				fields[x][y] = new FenceNE(x, y);
-			if (temp[0].equals("FenceNW"))
-				fields[x][y] = new FenceNW(x, y);
-			if (temp[0].equals("FenceNS"))
-				fields[x][y] = new FenceNS(x, y);
-			if (temp[0].equals("FenceSE"))
-				fields[x][y] = new FenceSE(x, y);
-			if (temp[0].equals("FenceSW"))
-				fields[x][y] = new FenceSW(x, y);
-			if (temp[0].equals("FenceWE"))
-				fields[x][y] = new FenceWE(x, y);
+			case "FenceNE":
+				fields.put(new IntPair(x,y), new FenceNE());break;
+			case "FenceNW":
+				fields.put(new IntPair(x,y), new FenceNW());break;
+			case "FenceNS":
+				fields.put(new IntPair(x,y), new FenceNS());break;
+			case "FenceSE":
+				fields.put(new IntPair(x,y), new FenceSE());break;
+			case "FenceSW":
+				fields.put(new IntPair(x,y), new FenceSW());break;
+			case "FenceWE":
+				fields.put(new IntPair(x,y), new FenceWE());break;
 			// 3-line
-			if (temp[0].equals("FenceNSE"))
-				fields[x][y] = new FenceNSE(x, y);
-			if (temp[0].equals("FenceNSW"))
-				fields[x][y] = new FenceNSW(x, y);
-			if (temp[0].equals("FenceNWE"))
-				fields[x][y] = new FenceNWE(x, y);
-			if (temp[0].equals("FenceSWE"))
-				fields[x][y] = new FenceSWE(x, y);
-
-			// new Field
+			case "FenceNSE":
+				fields.put(new IntPair(x,y), new FenceNSE());break;
+			case "FenceNSW":
+				fields.put(new IntPair(x,y), new FenceNSW());break;
+			case "FenceNWE":
+				fields.put(new IntPair(x,y), new FenceNWE());break;
+			case "FenceSWE":
+				fields.put(new IntPair(x,y), new FenceSWE());break;
+			default:
+				System.err.println("Map.createMapFromFile: unknown map field type " + temp[0]);
+				LOGGER.warning("Map.createMapFromFile: unknown map field type " + temp[0]);
+			}
 		}
+		
+		Util.timedLog("Map.createMapFromFile: Size of fields is " + fields.size());
 	}
 
 	private void createMonFromFile() {
@@ -285,7 +282,7 @@ public class Map {
 
 			npcs[i] = NPC.createNpcByName(name, x, y, i);
 
-			fields[x][y].take(i);
+			fields.get(new IntPair(x,y)).take(i);
 
 			try {
 				// npcs[i].setActive(delay);
@@ -297,15 +294,28 @@ public class Map {
 		}
 	}
 
+	private boolean paintedOnce = false; // FOR DEBUG
 	public void drawMap(int spaceLeft, int spaceTop, Graphics g) {
 		initMaxFields();
 
 		for (short i = 0; i < maxFieldsX + 2; i++) {
 			for (short j = 0; j < maxFieldsY + 2; j++) {
-				g.drawImage(bases[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
-						App.app);
-				g.drawImage(fields[mapX + i][mapY + j].getImage(), 30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop,
-						App.app);
+				IntPair currentTilePosition = new IntPair(mapX + i, mapY + j);
+				IntPair paintPosition = new IntPair(30 * (i - 1) + spaceLeft, 30 * (j - 1) + spaceTop);
+				
+				if (!paintedOnce) {
+					StringBuffer debugMessage = new StringBuffer();
+					
+					debugMessage.append("Painting ");
+					debugMessage.append(bases.get(currentTilePosition).getName() + "/" + fields.get(currentTilePosition).getName());
+					debugMessage.append(" " + currentTilePosition + " ");
+					debugMessage.append("at " + paintPosition);
+					
+					System.out.println(debugMessage);
+				}
+				
+				g.drawImage(bases.get(currentTilePosition).getImage(), paintPosition.x, paintPosition.y, App.app);
+				g.drawImage(fields.get(currentTilePosition).getImage(), paintPosition.x, paintPosition.y, App.app);
 			}
 		}
 
@@ -318,6 +328,8 @@ public class Map {
 			g.drawImage(pic, 30 * (x - 1) + spaceLeft, 30 * (y - 1) + spaceTop, App.app);
 		}
 		ExternalPlayer.paintAll(g);
+		
+		paintedOnce = true;
 	}
 
 	public void repaint() {
@@ -341,7 +353,7 @@ public class Map {
 		}
 
 		currentField.exited();
-		currentField = fields[x][y];
+		currentField = fields.get(new IntPair(x,y));
 		currentField.entered();
 
 		// MainProg.GameWin.setTitle("Current Position : " + x + " | " + y);
@@ -381,7 +393,7 @@ public class Map {
 	}
 
 	public String getNameOfField(int x, int y) {
-		return fields[x][y].getName();
+		return fields.get(new IntPair(x,y)).getName();
 	}
 
 	public void incrNPCNum() {
@@ -428,13 +440,13 @@ public class Map {
 			return -1;
 		}
 
-		if (!App.map.fields[x][y].checkAccessible(dir)) {
+		if (!App.map.fields.get(new IntPair(x,y)).checkAccessible(dir)) {
 			// System.out.println("Map.checkMove :: start field is not
 			// leavable");
 			return 0;
 		}
 
-		if (!App.map.fields[tempMapX][tempMapY].checkAccessible(tempDir)) {
+		if (!App.map.fields.get(new IntPair(tempMapX, tempMapY)).checkAccessible(tempDir)) {
 			// System.out.println("Map.checkMove :: goal field is not
 			// accessable");
 			return 0;
@@ -443,7 +455,7 @@ public class Map {
 	}
 
 	public String getNameOfOwner(int x, int y) {
-		int id_of_owner = fields[x][y].getOwnerID();
+		int id_of_owner = fields.get(new IntPair(x,y)).getOwnerID();
 		if (id_of_owner == -1)
 			return "";
 
@@ -451,7 +463,7 @@ public class Map {
 	}
 
 	public NPC getOwner(int x, int y) {
-		int id_of_owner = fields[x][y].getOwnerID();
+		int id_of_owner = fields.get(new IntPair(x,y)).getOwnerID();
 		if (id_of_owner > -1) {
 			return npcs[id_of_owner];
 		} else {
@@ -473,11 +485,9 @@ public class Map {
 
 	public void recreateMap() {
 		// clear arrays :
-		for (short i = 0; i < mapSize; i++) {
-			for (short j = 0; j < mapSize; j++) {
-				fields[i][j] = new PlainField(i, j);
-			}
-		}
+		fields = null;
+		bases = null;
+
 		for (int i = 0; i < 100; i++) {
 			npcs[i] = null;
 		}

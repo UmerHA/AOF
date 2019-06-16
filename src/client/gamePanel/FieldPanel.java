@@ -1,14 +1,5 @@
 package client.gamePanel;
 
-import javax.swing.JPanel;
-
-import client.App;
-import client.ExternalPlayer;
-import client.Map;
-import client.connection.Connector;
-import client.map.MapObject;
-import client.npc.NPC;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,6 +8,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.JPanel;
+
+import client.App;
+import client.ExternalPlayer;
+import client.IntPair;
+import client.Map;
+import client.connection.Connector;
+import client.map.MapObject;
+import client.npc.NPC;
 
 public class FieldPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -56,8 +57,8 @@ public class FieldPanel extends JPanel {
 				NPC temp = App.map.getOwner(mx, my);
 				info += "  : {"+temp.getOption1()+" / "+temp.getOption2()+"}";
 			}
-			if (App.map.fields[mx][my].isObject()) {
-				MapObject temp = (MapObject) App.map.fields[mx][my];
+			if (App.map.fields.get(new IntPair(mx, my)).isObject()) {
+				MapObject temp = (MapObject) App.map.fields.get(new IntPair(mx, my));
 				info += " {"+temp.getOption1()+" / examine}";
 			}
 			
@@ -96,8 +97,8 @@ public class FieldPanel extends JPanel {
 				return;
 			}
 			
-			if (App.map.fields[mx][my].isObject()) {
-				MapObject temp = (MapObject) App.map.fields[mx][my];
+			if (App.map.fields.get(new IntPair(mx, my)).isObject()) {
+				MapObject temp = (MapObject) App.map.fields.get(new IntPair(mx, my));
 				
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					temp.examine();

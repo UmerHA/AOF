@@ -4,8 +4,8 @@ import client.map.MapObject;
 
 public class Rock extends MapObject {
 
-	public Rock(int x, int y) {
-		super(x, y, "fields/Rock.png");
+	public Rock() {
+		super("fields/Rock.png");
 		examineTXT = "It's a simple rocky rock. By the way, it kinda looks like a rock.";
 	}
 

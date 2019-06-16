@@ -3,8 +3,8 @@ package client.map.mapFields;
 import client.map.MapField;
 
 public class Wood extends MapField {
-	public Wood(int x, int y) {
-		super(x, y, "fields/Wood.gif");
+	public Wood() {
+		super("fields/Wood.gif");
 
 		this.accessibleNorth = false;
 		this.accessibleSouth = false;

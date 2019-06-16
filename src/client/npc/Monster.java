@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import client.App;
 import client.CombatWindow;
+import client.IntPair;
 import client.Util;
 
 public class Monster extends NPC {
@@ -138,9 +139,7 @@ public class Monster extends NPC {
 	private void setIsDead(boolean state) {
 		isDead = state;
 		if (isDead) {
-			App.map.fields[this.mapX][this.mapY].free(); // besetztes
-																// Feld
-																// freigeben ...
+			App.map.fields.get(new IntPair(mapX, mapY)).free(); // besetztes Feld freigeben ...
 			System.out.println("NPC.setIsDead : died ...");
 			App.map.repaint();
 			birthThread = new cThread();

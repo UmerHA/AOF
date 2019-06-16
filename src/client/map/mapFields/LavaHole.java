@@ -4,8 +4,8 @@ import client.App;
 import client.map.MapField;
 
 public class LavaHole extends MapField {
-	public LavaHole (int x, int y) {		
-		super(x,y, "fields/LavaHole.jpg");
+	public LavaHole () {		
+		super("fields/LavaHole.jpg");
 		this.setOpenForNPC (false);
 	}
 	

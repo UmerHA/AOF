@@ -74,18 +74,14 @@ public class TreePanelBase extends PlainTreePanel {
 	}
 	public MapBase getMapBaseByName (String name) {
 		MapBase mb = null;
-		// x und y sind unwichtig
-		int x = 0;
-		int y = 0;
-		
 		if (name.equalsIgnoreCase("Grass"))
-			mb = new Grass(x,y);
+			mb = new Grass();
 		if (name.equalsIgnoreCase("Road"))
-			mb = new Road(x,y);
+			mb = new Road();
 		if (name.equalsIgnoreCase("Underground"))
-			mb = new Underground(x,y);
+			mb = new Underground();
 		if (name.equalsIgnoreCase("Nothing"))
-			mb = new Nothing(x,y);
+			mb = new Nothing();
 		
 		return mb;
 	}

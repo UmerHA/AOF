@@ -7,11 +7,8 @@ import client.Util;
 public class MapField {
 	String name;
 	
-	private static Image mapImage;
+	private Image mapImage;
 	String mapImageName;
-	
-	short x;
-	short y;
 	
 	protected boolean accessibleNorth = true;
 	protected boolean accessibleSouth = true;
@@ -26,20 +23,10 @@ public class MapField {
 
 	protected boolean isObject = false;
 	
-	public MapField (short x, short y, String picPath) {
-		constructor (x,y,picPath);	
-	}
-	public MapField (int x, int y, String picPath) {
-		constructor ((short) x,(short) y,picPath);		
-	}
-	
-	private void constructor (short x, short y, String picPath) {
-		this.x = x;
-		this.y = y;
+	public MapField (String picPath) {
 		this.mapImageName = picPath;
 		
-		if (mapImage == null)
-			mapImage = Util.getImage(picPath);
+		this.mapImage = Util.getImage(picPath);
 	}
 	
 	public boolean checkAccessible (int dir) {

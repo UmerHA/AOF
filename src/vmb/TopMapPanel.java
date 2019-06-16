@@ -16,6 +16,7 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import client.Util;
 import client.map.MapBase;
 import client.map.MapField;
 import client.npc.NPC;
@@ -438,19 +439,19 @@ public class TopMapPanel extends JPanel {
 		int my = map.getMapY();
 		
 		//corners
-		map.Fields[x1+mx][y1+my] = new client.map.mapFields.FenceNW(0,0);
-		map.Fields[x1+mx][y2+my] = new client.map.mapFields.FenceSW(0,0);
-		map.Fields[x2+mx][y1+my] = new client.map.mapFields.FenceNE(0,0);
-		map.Fields[x2+mx][y2+my] = new client.map.mapFields.FenceSE(0,0);
+		map.Fields[x1+mx][y1+my] = new client.map.mapFields.FenceNW();
+		map.Fields[x1+mx][y2+my] = new client.map.mapFields.FenceSW();
+		map.Fields[x2+mx][y1+my] = new client.map.mapFields.FenceNE();
+		map.Fields[x2+mx][y2+my] = new client.map.mapFields.FenceSE();
 		//north+south side:
 		for (int i=1;i<w-1;i++) {
-			map.Fields[x1+i+mx][y1+my] = new client.map.mapFields.FenceNorth(0,0);
-			map.Fields[x1+i+mx][y2+my] = new client.map.mapFields.FenceSouth(0,0);
+			map.Fields[x1+i+mx][y1+my] = new client.map.mapFields.FenceNorth();
+			map.Fields[x1+i+mx][y2+my] = new client.map.mapFields.FenceSouth();
 		}
 		//east+west side:
 		for (int i=1;i<h-1;i++) {
-			map.Fields[x1+mx][y1+i+my] = new client.map.mapFields.FenceWest(0,0);
-			map.Fields[x2+mx][y1+i+my] = new client.map.mapFields.FenceEast(0,0);
+			map.Fields[x1+mx][y1+i+my] = new client.map.mapFields.FenceWest();
+			map.Fields[x2+mx][y1+i+my] = new client.map.mapFields.FenceEast();
 		}
 		fieldsChanged = true;
 		map.repaint();
@@ -606,7 +607,7 @@ public class TopMapPanel extends JPanel {
 	}
 	public void saveBase() {
 		try {
-			String fileName = VisualMapBuilder.PATH + "BaseData" + map.getMapLV();
+			String fileName = Util.DATA_DIR + "BaseData" + map.getMapLV();
 
 			// delete and re-create file :
 			File aFile = new File(fileName);
@@ -651,7 +652,7 @@ public class TopMapPanel extends JPanel {
 	}
 	public void saveField() {
 		try {
-			String fileName = VisualMapBuilder.PATH + "MapData" + map.getMapLV();
+			String fileName = Util.DATA_DIR + "MapData" + map.getMapLV();
 
 			// delete and re-create file :
 			File aFile = new File(fileName);
@@ -693,7 +694,7 @@ public class TopMapPanel extends JPanel {
 	}
 	public void saveNPC() {
 		try {
-			String fileName = VisualMapBuilder.PATH + "MonData" + map.getMapLV();
+			String fileName = Util.DATA_DIR + "MonData" + map.getMapLV();
 
 			// delete and re-create file :
 			File aFile = new File(fileName);

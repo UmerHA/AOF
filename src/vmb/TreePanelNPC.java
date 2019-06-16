@@ -15,7 +15,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-import npc.NPC;
+import client.npc.NPC;
 
 
 public class TreePanelNPC extends PlainTreePanel {

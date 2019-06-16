@@ -10,17 +10,17 @@ import java.io.InputStreamReader;
 
 import javax.swing.JPanel;
 
-import map.MapBase;
-import map.MapField;
-import map.mapBases.*;
-import map.mapFields.*;
-import map.mapObjects.*;
-import npc.NPC;
+import client.map.MapBase;
+import client.map.MapField;
+import client.map.mapBases.*;
+import client.map.mapFields.*;
+import client.map.mapObjects.*;
+import client.npc.NPC;
 
 public class MapPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	public static final int mapSize = mainPackage.Map.mapSize;
+	public static final int mapSize = client.Map.mapSize;
 	
 	public String levelBase;
 	public MapBase[] Bases[] = new MapBase[mapSize][mapSize];

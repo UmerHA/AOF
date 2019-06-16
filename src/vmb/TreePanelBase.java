@@ -6,8 +6,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-import map.MapBase;
-import map.mapBases.*;
+import client.map.MapBase;
+import client.map.mapBases.*;
 
 
 public class TreePanelBase extends PlainTreePanel {

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-06-16T10:21:06.875461700Z</date>
+  <millis>1560680466875</millis>
+  <nanos>461700</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Base</message>
+</record>
+<record>
+  <date>2019-06-16T10:22:07.031902500Z</date>
+  <millis>1560680527031</millis>
+  <nanos>902500</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Fields</message>
+</record>
+<record>
+  <date>2019-06-16T10:22:07.360406800Z</date>
+  <millis>1560680527360</millis>
+  <nanos>406800</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating NPCs</message>
+</record>
+<record>
+  <date>2019-06-16T10:22:07.427397300Z</date>
+  <millis>1560680527427</millis>
+  <nanos>397300</nanos>
+  <sequence>3</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: created all map items</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-06-16T10:45:25.601155600Z</date>
+  <millis>1560681925601</millis>
+  <nanos>155600</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>client.connection.ClientThread</class>
+  <method>run</method>
+  <thread>21</thread>
+  <message>Server is down</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-06-16T10:48:46.344496300Z</date>
+  <millis>1560682126344</millis>
+  <nanos>496300</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Base</message>
+</record>
+<record>
+  <date>2019-06-16T10:49:44.127940900Z</date>
+  <millis>1560682184127</millis>
+  <nanos>940900</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Fields</message>
+</record>
+<record>
+  <date>2019-06-16T10:49:44.408441500Z</date>
+  <millis>1560682184408</millis>
+  <nanos>441500</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating NPCs</message>
+</record>
+<record>
+  <date>2019-06-16T10:49:44.466444800Z</date>
+  <millis>1560682184466</millis>
+  <nanos>444800</nanos>
+  <sequence>3</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: created all map items</message>
+</record>
+<record>
+  <date>2019-06-16T10:51:47.789513600Z</date>
+  <millis>1560682307789</millis>
+  <nanos>513600</nanos>
+  <sequence>4</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.App</class>
+  <method>setContentPanel</method>
+  <thread>21</thread>
+  <message>Showing panel: Game Panel</message>
+</record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-06-16T10:54:51.510562500Z</date>
+  <millis>1560682491510</millis>
+  <nanos>562500</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating plain fields</message>
+</record>
+<record>
+  <date>2019-06-16T10:55:48.526568100Z</date>
+  <millis>1560682548526</millis>
+  <nanos>568100</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Base</message>
+</record>
+<record>
+  <date>2019-06-16T10:56:47.119275100Z</date>
+  <millis>1560682607119</millis>
+  <nanos>275100</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Fields</message>
+</record>
+<record>
+  <date>2019-06-16T10:56:47.456778Z</date>
+  <millis>1560682607456</millis>
+  <nanos>778000</nanos>
+  <sequence>3</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating NPCs</message>
+</record>
+<record>
+  <date>2019-06-16T10:56:47.519777300Z</date>
+  <millis>1560682607519</millis>
+  <nanos>777300</nanos>
+  <sequence>4</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: created all map items</message>
+</record>
+<record>
+  <date>2019-06-16T10:58:44.994782300Z</date>
+  <millis>1560682724994</millis>
+  <nanos>782300</nanos>
+  <sequence>5</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.App</class>
+  <method>setContentPanel</method>
+  <thread>21</thread>
+  <message>Showing panel: Game Panel</message>
+</record>

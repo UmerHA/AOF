@@ -6,9 +6,9 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-import map.MapField;
-import map.mapFields.*;
-import map.mapObjects.*;
+import client.map.MapField;
+import client.map.mapFields.*;
+import client.map.mapObjects.*;
 
 
 public class TreePanelField extends PlainTreePanel {

@@ -16,9 +16,9 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import map.MapBase;
-import map.MapField;
-import npc.NPC;
+import client.map.MapBase;
+import client.map.MapField;
+import client.npc.NPC;
 
 public class TopMapPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -438,19 +438,19 @@ public class TopMapPanel extends JPanel {
 		int my = map.getMapY();
 		
 		//corners
-		map.Fields[x1+mx][y1+my] = new map.mapFields.FenceNW(0,0);
-		map.Fields[x1+mx][y2+my] = new map.mapFields.FenceSW(0,0);
-		map.Fields[x2+mx][y1+my] = new map.mapFields.FenceNE(0,0);
-		map.Fields[x2+mx][y2+my] = new map.mapFields.FenceSE(0,0);
+		map.Fields[x1+mx][y1+my] = new client.map.mapFields.FenceNW(0,0);
+		map.Fields[x1+mx][y2+my] = new client.map.mapFields.FenceSW(0,0);
+		map.Fields[x2+mx][y1+my] = new client.map.mapFields.FenceNE(0,0);
+		map.Fields[x2+mx][y2+my] = new client.map.mapFields.FenceSE(0,0);
 		//north+south side:
 		for (int i=1;i<w-1;i++) {
-			map.Fields[x1+i+mx][y1+my] = new map.mapFields.FenceNorth(0,0);
-			map.Fields[x1+i+mx][y2+my] = new map.mapFields.FenceSouth(0,0);
+			map.Fields[x1+i+mx][y1+my] = new client.map.mapFields.FenceNorth(0,0);
+			map.Fields[x1+i+mx][y2+my] = new client.map.mapFields.FenceSouth(0,0);
 		}
 		//east+west side:
 		for (int i=1;i<h-1;i++) {
-			map.Fields[x1+mx][y1+i+my] = new map.mapFields.FenceWest(0,0);
-			map.Fields[x2+mx][y1+i+my] = new map.mapFields.FenceEast(0,0);
+			map.Fields[x1+mx][y1+i+my] = new client.map.mapFields.FenceWest(0,0);
+			map.Fields[x2+mx][y1+i+my] = new client.map.mapFields.FenceEast(0,0);
 		}
 		fieldsChanged = true;
 		map.repaint();

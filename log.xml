@@ -1002,3 +1002,155 @@
   <message>Server is down</message>
 </record>
 </log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-06-21T16:53:25.207337200Z</date>
+  <millis>1561136005207</millis>
+  <nanos>337200</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Base</message>
+</record>
+<record>
+  <date>2019-06-21T16:53:25.266836Z</date>
+  <millis>1561136005266</millis>
+  <nanos>836000</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Fields</message>
+</record>
+<record>
+  <date>2019-06-21T16:53:25.659335700Z</date>
+  <millis>1561136005659</millis>
+  <nanos>335700</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating NPCs</message>
+</record>
+<record>
+  <date>2019-06-21T16:53:25.827332700Z</date>
+  <millis>1561136005827</millis>
+  <nanos>332700</nanos>
+  <sequence>3</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: created all map items</message>
+</record>
+<record>
+  <date>2019-06-21T16:53:26.151836100Z</date>
+  <millis>1561136006151</millis>
+  <nanos>836100</nanos>
+  <sequence>4</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.App</class>
+  <method>setContentPanel</method>
+  <thread>21</thread>
+  <message>Showing panel: Game Panel</message>
+</record>
+<record>
+  <date>2019-06-21T16:53:43.811553100Z</date>
+  <millis>1561136023811</millis>
+  <nanos>553100</nanos>
+  <sequence>5</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>client.connection.ClientThread</class>
+  <method>run</method>
+  <thread>21</thread>
+  <message>Server is down</message>
+</record>
+</log>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-06-21T16:59:26.252396200Z</date>
+  <millis>1561136366252</millis>
+  <nanos>396200</nanos>
+  <sequence>0</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Base</message>
+</record>
+<record>
+  <date>2019-06-21T16:59:26.292396800Z</date>
+  <millis>1561136366292</millis>
+  <nanos>396800</nanos>
+  <sequence>1</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating Fields</message>
+</record>
+<record>
+  <date>2019-06-21T16:59:26.625397400Z</date>
+  <millis>1561136366625</millis>
+  <nanos>397400</nanos>
+  <sequence>2</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: creating NPCs</message>
+</record>
+<record>
+  <date>2019-06-21T16:59:26.682894700Z</date>
+  <millis>1561136366682</millis>
+  <nanos>894700</nanos>
+  <sequence>3</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.Map</class>
+  <method>create</method>
+  <thread>21</thread>
+  <message>MapPanel.create :: created all map items</message>
+</record>
+<record>
+  <date>2019-06-21T16:59:26.996898800Z</date>
+  <millis>1561136366996</millis>
+  <nanos>898800</nanos>
+  <sequence>4</sequence>
+  <logger>global</logger>
+  <level>INFO</level>
+  <class>client.App</class>
+  <method>setContentPanel</method>
+  <thread>21</thread>
+  <message>Showing panel: Game Panel</message>
+</record>
+<record>
+  <date>2019-06-21T16:59:46.974164500Z</date>
+  <millis>1561136386974</millis>
+  <nanos>164500</nanos>
+  <sequence>5</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>client.connection.ClientThread</class>
+  <method>run</method>
+  <thread>21</thread>
+  <message>Server is down</message>
+</record>
+</log>

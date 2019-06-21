@@ -112,6 +112,7 @@ public class App extends JFrame {
 		app.setResizable(false);
 		app.setLayout(new BorderLayout());
 		app.add(cards, "Center");
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		try {
 			Connector.start();
